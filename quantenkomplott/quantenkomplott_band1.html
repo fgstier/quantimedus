@@ -1,0 +1,755 @@
+﻿<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS QUANTENKOMPLOTT I - F.G. Stier</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,400&family=Share+Tech+Mono&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        metal: {
+                            950: '#060709',
+                            900: '#0a0c10',
+                            850: '#0f1218',
+                            800: '#141822',
+                            700: '#1e2433',
+                            600: '#2b3448',
+                            500: '#404d69'
+                        },
+                        brass: {
+                            100: '#fff7d1',
+                            200: '#fff0a6',
+                            300: '#fbe278',
+                            400: '#f5cd47',
+                            500: '#e6c670', // Polished Brass
+                            600: '#c5a059',
+                            700: '#98773c',
+                            800: '#6d5328',
+                            900: '#473518'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Chakra Petch', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0c10;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(230, 198, 112, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 10% 80%, rgba(64, 77, 105, 0.15) 0%, transparent 40%),
+                linear-gradient(to bottom, rgba(10, 12, 16, 0.95), rgba(6, 7, 9, 0.98)),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Technical 3D Brass Text Effect */
+        .text-3d-brass {
+            color: #f5cd47;
+            background: linear-gradient(180deg, #fff2a8 0%, #e6c670 45%, #98773c 80%, #fff0a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 
+                0px 2px 0px #6d5328,
+                0px 4px 0px #473518,
+                0px 6px 10px rgba(0, 0, 0, 0.9),
+                0px 0px 25px rgba(230, 198, 112, 0.4);
+            filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.8));
+        }
+
+        .text-brass-subtle {
+            background: linear-gradient(180deg, #fbe278 0%, #c5a059 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Dark Metal Card with Metallic Beveled Borders */
+        .metal-panel {
+            background: linear-gradient(135deg, rgba(30, 36, 51, 0.6) 0%, rgba(15, 18, 24, 0.9) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            box-shadow: 
+                inset 1px 1px 0px rgba(255, 240, 166, 0.15),
+                inset -1px -1px 0px rgba(0, 0, 0, 0.8),
+                0 10px 30px -5px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            position: relative;
+        }
+
+        .metal-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(230, 198, 112, 0.5), transparent);
+        }
+
+        /* Cybernetic Cut Corners */
+        .cyber-corner {
+            clip-path: polygon(
+                0 12px, 12px 0, 
+                calc(100% - 12px) 0, 100% 12px, 
+                100% calc(100% - 12px), calc(100% - 12px) 100%, 
+                12px 100%, 0 calc(100% - 12px)
+            );
+        }
+
+        /* Glowing Brass Buttons */
+        .btn-brass {
+            background: linear-gradient(180deg, #f5cd47 0%, #c5a059 60%, #98773c 100%);
+            color: #060709;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            border: 1px solid #fff2a8;
+            box-shadow: 
+                0 0 15px rgba(230, 198, 112, 0.3),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+            transition: all 0.2s ease;
+        }
+
+        .btn-brass:hover {
+            background: linear-gradient(180deg, #fff0a6 0%, #e6c670 60%, #c5a059 100%);
+            box-shadow: 
+                0 0 25px rgba(230, 198, 112, 0.6),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-brass-outline {
+            background: rgba(15, 18, 24, 0.8);
+            color: #e6c670;
+            font-family: 'Chakra Petch', sans-serif;
+            border: 1px solid #c5a059;
+            box-shadow: inset 0 0 10px rgba(197, 160, 89, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .btn-brass-outline:hover {
+            background: rgba(197, 160, 89, 0.15);
+            border-color: #f5cd47;
+            color: #fff7d1;
+            box-shadow: 0 0 15px rgba(230, 198, 112, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Spotlight Overlay */
+        .spotlight-overlay {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 198, 112, 0.05), transparent 40%);
+            transition: opacity 0.3s;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0c10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b3448;
+            border: 1px solid #6d5328;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c5a059;
+        }
+    </style>
+    <link rel="preload" as="image" href="/wappen.jpg">
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brass-500 selection:text-metal-950">
+
+    <div id="spotlight" class="spotlight-overlay"></div>
+
+    <header class="sticky top-0 z-50 bg-metal-950/80 backdrop-blur-md border-b border-brass-600/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded bg-metal-850 border border-brass-500/60 flex items-center justify-center shadow-lg shadow-brass-500/10">
+                    <i class="fa-solid fa-wand-magic-sparkles text-brass-400 text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <span class="font-tech text-2xl font-bold tracking-wider text-3d-brass">QUANTENKOMPLOTT I</span>
+                    <span class="hidden sm:inline-block text-xs font-mono text-brass-600 block -mt-1 tracking-widest">GLASSTAB // LEDERLAPPEN // ELEKTROSTATIK</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex space-x-6 font-tech text-sm tracking-wider">
+                <a href="#hero" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-bolt text-xs text-brass-500"></i> Start</a>
+                <a href="#sim-section" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-xs text-brass-500"></i> Labor-Simulator</a>
+                <a href="#toc-section" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-list-ol text-xs text-brass-500"></i> Inhaltsverzeichnis</a>
+                <a href="#kdp-section" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-code text-xs text-brass-500"></i> Amazon HTML</a>
+			    <a href="quantimedus.html" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-bolt text-xs text-brass-500"></i>Band I-IV</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#kdp-section" class="btn-brass px-4 py-2 text-xs rounded uppercase tracking-wider cyber-corner">
+                    <i class="fa-solid fa-book-open mr-1"></i> Band I Details
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <section id="hero" class="relative pt-12 pb-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-metal-850/90 border border-brass-600/40 mb-8 shadow-inner">
+                    <span class="text-brass-400 font-mono text-xs uppercase tracking-widest"><i class="fa-solid fa-feather-pointed mr-2"></i>F.G. Stier • Das Quantenkomplott I</span>
+                </div>
+
+                <div class="metal-panel p-8 sm:p-14 rounded-2xl max-w-5xl mx-auto cyber-corner my-4">
+                    <h1 class="font-tech text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-3d-brass mb-4">
+                        DAS QUANTENKOMPLOTT I
+                    </h1>
+                    <p class="font-tech text-lg sm:text-2xl font-medium text-brass-subtle tracking-wide max-w-3xl mx-auto border-t border-b border-brass-600/20 py-3 my-4">
+                        Das Glasstab-Lederlappen-Drama und die Mechanik der Elektrostatik
+                    </p>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mt-6 font-sans">
+                        Eine befreiende Demontage der historischen Irrtümer der Reibungselektrizität. Vom trivialen Mythos des Lederlappens bis zur exakten Hochspannungsmechanik des Van-de-Graaff-Generators.
+                    </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#sim-section" class="btn-brass px-8 py-3.5 text-sm uppercase rounded cyber-corner w-full sm:w-auto flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Reibung & Ladung Simulieren
+                        </a>
+                        <a href="#toc-section" class="btn-brass-outline px-8 py-3.5 text-sm uppercase rounded cyber-corner w-full sm:w-auto flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-list"></i> Kapitelübersicht betrachten
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Technical parameters -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mt-8 font-mono text-xs">
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Phänomen</div>
+                        <div class="text-brass-400 font-bold mt-1">Triboelektrizität</div>
+                    </div>
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Träger</div>
+                        <div class="text-brass-400 font-bold mt-1">Glasstab / Leder</div>
+                    </div>
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Generatortyp</div>
+                        <div class="text-brass-400 font-bold mt-1">Van-de-Graaff</div>
+                    </div>
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Analyse</div>
+                        <div class="text-emerald-400 font-bold mt-1">Leitungs-Dilemma Solved</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sim-section" class="py-16 bg-metal-900 border-t border-b border-brass-600/20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                    <div>
+                        <div class="text-xs font-mono text-brass-500 uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-flask-vial"></i> Interaktives Laboratorium
+                        </div>
+                        <h2 class="font-tech text-3xl sm:text-4xl font-bold text-3d-brass mt-1">
+                            Glasstab-Lederlappen & Generator-Simulation
+                        </h2>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">
+                        Bewegen Sie den Reibungsregler oder klicken Sie in das Feld, um elektrische Ladungstrennung und hochfrequente Funkenüberschläge zu erzeugen.
+                    </p>
+                </div>
+
+                <div class="metal-panel rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden border border-brass-600/40">
+                    
+                    <!-- Control Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 pb-4 mb-4 border-b border-metal-700/80 font-tech text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="text-gray-400 font-mono">Versuchsanordnung:</span>
+                            <button id="btn-mode-friction" onclick="setMode('friction')" class="px-3 py-1.5 rounded btn-brass text-xs">Glasstab & Leder</button>
+                            <button id="btn-mode-vandegraaff" onclick="setMode('vandegraaff')" class="px-3 py-1.5 rounded btn-brass-outline text-xs">Van-de-Graaff Kugel</button>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <label class="flex items-center gap-2 text-gray-300 font-mono">
+                                <span>Intensität / Reibung:</span>
+                                <input type="range" id="friction-slider" min="1" max="10" value="5" class="accent-brass-500 w-28">
+                            </label>
+                            <button onclick="resetSim()" class="btn-brass-outline px-3 py-1.5 rounded hover:bg-red-900/30 text-red-300">
+                                <i class="fa-solid fa-rotate-right mr-1"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Canvas -->
+                    <div class="relative w-full h-[450px] bg-metal-950 rounded-xl overflow-hidden border border-metal-700/60 shadow-inner">
+                        <canvas id="labCanvas" class="w-full h-full cursor-pointer"></canvas>
+                        
+                        <div class="absolute bottom-3 left-3 pointer-events-none font-mono text-[11px] text-brass-500/80 bg-metal-950/80 px-2.5 py-1 rounded border border-metal-800">
+                            <span id="sim-status">ANORDNUNG: TRIBOELEKTRISCHE LADUNGSTRENNUNG AKTIV</span>
+                        </div>
+                        <div class="absolute top-3 right-3 pointer-events-none font-mono text-[11px] text-gray-400 bg-metal-950/80 px-2.5 py-1 rounded border border-metal-800">
+                            <i class="fa-solid fa-hand-pointer text-brass-400 mr-1"></i> Klick = Entladung auslösen
+                        </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs text-gray-400 pt-2">
+                        <div class="flex items-center gap-2 bg-metal-850/60 p-2.5 rounded border border-metal-700">
+                            <div class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_#f5cd47]"></div>
+                            <span>Positiver Überschuss (+)</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-metal-850/60 p-2.5 rounded border border-metal-700">
+                            <div class="w-3 h-3 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]"></div>
+                            <span>Negativer Ladungsträger (-)</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-metal-850/60 p-2.5 rounded border border-metal-700">
+                            <div class="w-3 h-3 rounded-full bg-white shadow-[0_0_8px_#ffffff]"></div>
+                            <span>Elektrischer Funkenentladungspfad</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="toc-section" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono text-brass-500 uppercase tracking-widest"><i class="fa-solid fa-list-check"></i> Inhaltsverzeichnis</span>
+                    <h2 class="font-tech text-4xl sm:text-5xl font-bold text-3d-brass mt-2">
+                        Das Quantenkomplott I – Struktur
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base mt-4">
+                        Klicken Sie auf ein Kapitel, um die mechanische Kernhypothese und Vorschau einzusehen.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Table of Contents Item List -->
+                    <div class="lg:col-span-6 space-y-3 font-mono text-sm">
+                        
+                        <div onclick="showChapter('c1')" id="toc-c1" class="metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 1</div>
+                                <div class="text-gray-200 font-sans font-bold text-base mt-0.5">Das Glasstab-Lederlappen-Drama</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2.5 py-1 rounded border border-metal-700">S. 7</span>
+                        </div>
+
+                        <div onclick="showChapter('c2')" id="toc-c2" class="metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 2</div>
+                                <div class="text-gray-200 font-sans font-bold text-base mt-0.5">Der Zauberstab der Funken</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2.5 py-1 rounded border border-metal-700">S. 24</span>
+                        </div>
+
+                        <div onclick="showChapter('c3')" id="toc-c3" class="metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 3</div>
+                                <div class="text-gray-200 font-sans font-bold text-base mt-0.5">Die einfachste aller Erklärung</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2.5 py-1 rounded border border-metal-700">S. 36</span>
+                        </div>
+
+                        <div onclick="showChapter('c4')" id="toc-c4" class="metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 4</div>
+                                <div class="text-gray-200 font-sans font-bold text-base mt-0.5">Der Van-de-Graaff-Generator</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2.5 py-1 rounded border border-metal-700">S. 45</span>
+                        </div>
+
+                        <div onclick="showChapter('c5')" id="toc-c5" class="metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 5</div>
+                                <div class="text-gray-200 font-sans font-bold text-base mt-0.5">Das Leitungs-Dilemma</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2.5 py-1 rounded border border-metal-700">S. 61</span>
+                        </div>
+
+                        <div onclick="showChapter('c6')" id="toc-c6" class="metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 6</div>
+                                <div class="text-gray-200 font-sans font-bold text-base mt-0.5">Konstrukt mit stilistischen Nebelkerzen</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2.5 py-1 rounded border border-metal-700">S. 87</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Chapter Detail Display Card -->
+                    <div class="lg:col-span-6">
+                        <div class="metal-panel p-8 rounded-xl cyber-corner min-h-[380px] flex flex-col justify-between border border-brass-500/40">
+                            <div>
+                                <div class="flex items-center justify-between border-b border-brass-600/30 pb-3 mb-4">
+                                    <span id="chapter-tag" class="font-mono text-xs text-brass-400 font-bold uppercase">KAPITEL 1 // ANANLYSE</span>
+                                    <span id="chapter-page" class="font-mono text-xs text-gray-500">SEITE 7</span>
+                                </div>
+                                <h3 id="chapter-title" class="font-tech text-2xl font-bold text-brass-200 mb-4">
+                                    Das Glasstab-Lederlappen-Drama
+                                </h3>
+                                <p id="chapter-desc" class="text-gray-300 text-sm leading-relaxed font-sans">
+                                    Die Entzauberung des jahrhundertealten Grundversuchs der Schulphysik. Warum die klassische Erklärung der Triboelektrizität auf schwankendem Fundament steht und welche unberücksichtigten mechanischen Kräfte bei der Reibung von Glas und Leder tatsächlich wirken.
+                                </p>
+                            </div>
+
+                            <div class="mt-8 pt-4 border-t border-metal-700/60 flex items-center justify-between text-xs font-mono">
+                                <span class="text-brass-600"><i class="fa-solid fa-microchip mr-1"></i> FELDMECHANIK BAND I</span>
+                                <span class="text-gray-400">AUTOR: F.G. STIER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="kdp-section" class="py-16 bg-metal-900 border-t border-brass-600/30">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="metal-panel p-6 sm:p-10 rounded-2xl cyber-corner border border-brass-500/50">
+                    
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <span class="text-xs font-mono text-brass-500 uppercase tracking-widest"><i class="fa-brands fa-amazon text-brass-400 mr-1"></i> Verlags- & Marketing-Tool</span>
+                            <h3 class="font-tech text-2xl font-bold text-3d-brass mt-1">
+                                Amazon Buchbeschreibung (HTML)
+                            </h3>
+                        </div>
+                        <button onclick="copyKDPText()" class="btn-brass px-5 py-2.5 text-xs rounded cyber-corner flex items-center gap-2">
+                            <i class="fa-solid fa-copy"></i> HTML Code Kopieren
+                        </button>
+                        <a href="https://www.amazon.de/dp/3912752168"  target="_blank" rel="noopener noreferrer" class="btn-brass px-4 py-2 text-xs rounded uppercase tracking-wider cyber-corner">
+                           <i class="fa-solid fa-copy">  </i> erhältlich auf Amazon
+                        </a>
+
+
+                    </div>
+
+                    <div class="relative bg-metal-950 rounded-lg p-4 font-mono text-xs text-brass-300/90 border border-metal-700 overflow-x-auto max-h-64">
+                        <pre id="kdp-code-block" class="whitespace-pre-wrap leading-relaxed">&lt;p&gt;&lt;b&gt;Die Demontage der historischen Elektrostatik: Eine physikalisch-mechanische Ursachenanalyse.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;In &lt;b&gt;»Das Quantenkomplott I: Das Glasstab-Lederlappen-Drama«&lt;/b&gt; nimmt F.G. Stier die vermeintlich einfachsten Grundlagen unseres physikalischen Weltbilds unter die Lupe. Was in Schulbüchern als gesicherte Reibungselektrizität gelehrt wird, entpuppt sich bei genauer Betrachtung als ein Konstrukt voller stilistischer Nebelkerzen.&lt;/p&gt;
+
+&lt;h3&gt;Aus dem Inhalt:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;Das Glasstab-Lederlappen-Drama:&lt;/b&gt; Der Mythos der einfachen Ladungstrennung.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Der Zauberstab der Funken:&lt;/b&gt; Wie hochfrequente Entladungen wirklich entstehen.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Die einfachste aller Erklärungen:&lt;/b&gt; Rückkehr zur materiellen Logik der Mechanik.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Der Van-de-Graaff-Generator:&lt;/b&gt; Die Grenzen und Geheimnisse des Bandgenerators.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Das Leitungs-Dilemma:&lt;/b&gt; Der ungelöste Widerspruch im Ladungstransport.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Konstrukt mit stilistischen Nebelkerzen:&lt;/b&gt; Warum die etablierte Theorie den Blick auf das Feld verstellt.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ein essenzielles Werk für kritische Physiker, Denker und Ingenieure, die bereit sind, die Grundlagen der Elektrostatik neu zu hinterfragen.&lt;/p&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-metal-950 border-t border-brass-600/30 py-8 font-mono text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="font-tech text-base font-bold text-brass-400">QUANTENKOMPLOTT I</span>
+                <span class="block text-gray-500 text-xs">© F.G. Stier • Elektrostatik & Mechanik</span>
+            </div>
+            <div class="text-brass-600 flex gap-4">
+                <span>BAND I</span>
+                <span>•</span>
+                <span>TRIBOELEKTRIZITÄT</span>
+                <span>•</span>
+                <span>VAN-DE-GRAAFF</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Spotlight Tracking ---
+        const spotlight = document.getElementById('spotlight');
+        window.addEventListener('pointermove', (e) => {
+            spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+            spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+
+        // --- Chapter View Switching ---
+        const chapterData = {
+            c1: {
+                tag: "KAPITEL 1 // ANANLYSE",
+                page: "SEITE 7",
+                title: "Das Glasstab-Lederlappen-Drama",
+                desc: "Die Entzauberung des jahrhundertealten Grundversuchs der Schulphysik. Warum die klassische Erklärung der Triboelektrizität auf schwankendem Fundament steht und welche unberücksichtigten mechanischen Kräfte bei der Reibung von Glas und Leder tatsächlich wirken."
+            },
+            c2: {
+                tag: "KAPITEL 2 // EXPERIMENT",
+                page: "SEITE 24",
+                title: "Der Zauberstab der Funken",
+                desc: "Eine phänomenologische Untersuchung der sichtbaren Funkenentladung. Wie Überschläge an feinen Radien und Polspitzen entstehen und welche Rolle die Feldgeometrie im Vergleich zu rein statistischer Ladungsanhäufung spielt."
+            },
+            c3: {
+                tag: "KAPITEL 3 // THEORIE",
+                page: "SEITE 36",
+                title: "Die einfachste aller Erklärung",
+                desc: "Rückkehr zur physikalischen Sparsamkeit: Reduktion komplexer Äther- und Quantenhypothesen auf eine greifbare, stoffliche und raummechanische Grundlogik."
+            },
+            c4: {
+                tag: "KAPITEL 4 // GENERATOR",
+                page: "SEITE 45",
+                title: "Der Van-de-Graaff-Generator",
+                desc: "Funktionsanalyse des klassischen Bandgenerators. Vom kontinuierlichen Ladungstransport über die Feldübertragung in die Hohlkugel bis hin zu den physikalischen Belastungsgrenzen der Dielektrikakette."
+            },
+            c5: {
+                tag: "KAPITEL 5 // WIDERSPRUCH",
+                page: "SEITE 61",
+                title: "Das Leitungs-Dilemma",
+                desc: "Wo verläuft der Strom tatsächlich? Untersuchung der gravierenden Widersprüche zwischen Festkörper-Elektronenleitung und dem tatsächlichen Feldfluss im umgebenden Raum."
+            },
+            c6: {
+                tag: "KAPITEL 6 // KRITIK",
+                page: "SEITE 87",
+                title: "Konstrukt mit stilistischen Nebelkerzen",
+                desc: "Eine rhetorische und wissenschaftshistorische Demontage mathematischer Hilfskonstrukte, die in Lehrbüchern verwendet werden, um Lücken in der klassischen Elektrodynamik zu verschleiern."
+            }
+        };
+
+        function showChapter(id) {
+            // Update UI card
+            const data = chapterData[id];
+            document.getElementById('chapter-tag').innerText = data.tag;
+            document.getElementById('chapter-page').innerText = data.page;
+            document.getElementById('chapter-title').innerText = data.title;
+            document.getElementById('chapter-desc').innerText = data.desc;
+
+            // Highlight TOC item
+            Object.keys(chapterData).forEach(k => {
+                const el = document.getElementById(`toc-${k}`);
+                if (k === id) {
+                    el.className = "metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-brass-500 bg-metal-800/80 cursor-pointer transition-all";
+                } else {
+                    el.className = "metal-panel p-4 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all";
+                }
+            });
+        }
+
+        // --- Canvas Simulator Logic ---
+        const canvas = document.getElementById('labCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let mode = 'friction'; // 'friction' or 'vandegraaff'
+        let intensity = 5;
+        let particles = [];
+        let sparks = [];
+
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            width = canvas.width;
+            height = canvas.height;
+            initParticles();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        document.getElementById('friction-slider').addEventListener('input', (e) => {
+            intensity = parseInt(e.target.value);
+        });
+
+        function setMode(m) {
+            mode = m;
+            document.getElementById('btn-mode-friction').className = m === 'friction' ? 'px-3 py-1.5 rounded btn-brass text-xs' : 'px-3 py-1.5 rounded btn-brass-outline text-xs';
+            document.getElementById('btn-mode-vandegraaff').className = m === 'vandegraaff' ? 'px-3 py-1.5 rounded btn-brass text-xs' : 'px-3 py-1.5 rounded btn-brass-outline text-xs';
+            
+            document.getElementById('sim-status').innerText = m === 'friction' ? 
+                'ANORDNUNG: TRIBOELEKTRISCHE LADUNGSTRENNUNG AKTIV' : 
+                'ANORDNUNG: VAN-DE-GRAAFF HOCHSPANNUNGSKUGEL AKTIV';
+            
+            initParticles();
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = 60;
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    type: Math.random() > 0.5 ? 1 : -1,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2
+                });
+            }
+        }
+
+        function resetSim() {
+            sparks = [];
+            initParticles();
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            
+            // Generate lightning spark towards click position
+            const startX = mode === 'vandegraaff' ? width * 0.5 : width * 0.3;
+            const startY = mode === 'vandegraaff' ? height * 0.4 : height * 0.5;
+
+            sparks.push({
+                x1: startX,
+                y1: startY,
+                x2: clickX,
+                y2: clickY,
+                life: 15
+            });
+        });
+
+        function drawGlassRodAndLeather() {
+            // Glass Rod
+            ctx.fillStyle = 'rgba(230, 240, 255, 0.2)';
+            ctx.strokeStyle = '#c5a059';
+            ctx.lineWidth = 2;
+            ctx.fillRect(width * 0.2, height * 0.45, width * 0.4, 30);
+            ctx.strokeRect(width * 0.2, height * 0.45, width * 0.4, 30);
+
+            // Leather Pad
+            ctx.fillStyle = '#6d5328';
+            ctx.fillRect(width * 0.5, height * 0.4, 80, 70);
+            ctx.strokeStyle = '#f5cd47';
+            ctx.strokeRect(width * 0.5, height * 0.4, 80, 70);
+
+            ctx.fillStyle = '#f5cd47';
+            ctx.font = '12px "Share Tech Mono"';
+            ctx.fillText('GLASSTAB (+)', width * 0.22, height * 0.42);
+            ctx.fillText('LEDER (-)', width * 0.51, height * 0.37);
+        }
+
+        function drawVanDeGraaff() {
+            // Base & Belt
+            ctx.fillStyle = '#1e2433';
+            ctx.fillRect(width * 0.47, height * 0.5, 50, 150);
+            
+            // Belt Animation
+            ctx.strokeStyle = '#e6c670';
+            ctx.setLineDash([6, 6]);
+            ctx.beginPath();
+            ctx.moveTo(width * 0.49, height * 0.5);
+            ctx.lineTo(width * 0.49, height * 0.85);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Sphere Top
+            ctx.beginPath();
+            ctx.arc(width * 0.5, height * 0.4, 60, 0, Math.PI * 2);
+            ctx.fillStyle = 'radial-gradient(circle, #f5cd47, #473518)';
+            ctx.fillStyle = '#c5a059';
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#fff2a8';
+            ctx.stroke();
+
+            ctx.fillStyle = '#060709';
+            ctx.font = '12px "Share Tech Mono"';
+            ctx.fillText('HOHLKUGEL', width * 0.45, height * 0.41);
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(10, 12, 16, 0.3)';
+            ctx.fillRect(0, 0, width, height);
+
+            if (mode === 'friction') {
+                drawGlassRodAndLeather();
+            } else {
+                drawVanDeGraaff();
+            }
+
+            // Draw and update particles
+            for (let p of particles) {
+                p.x += p.vx * (intensity / 3);
+                p.y += p.vy * (intensity / 3);
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = p.type === 1 ? '#f5cd47' : '#38bdf8';
+                ctx.shadowColor = p.type === 1 ? '#f5cd47' : '#38bdf8';
+                ctx.shadowBlur = 8;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            // Render Sparks
+            for (let i = sparks.length - 1; i >= 0; i--) {
+                let s = sparks[i];
+                ctx.beginPath();
+                ctx.moveTo(s.x1, s.y1);
+                
+                // Jagged lightning path
+                let segments = 5;
+                let currX = s.x1;
+                let currY = s.y1;
+                for (let j = 1; j < segments; j++) {
+                    let nextX = s.x1 + (s.x2 - s.x1) * (j / segments) + (Math.random() - 0.5) * 30;
+                    let nextY = s.y1 + (s.y2 - s.y1) * (j / segments) + (Math.random() - 0.5) * 30;
+                    ctx.lineTo(nextX, nextY);
+                    currX = nextX;
+                    currY = nextY;
+                }
+                ctx.lineTo(s.x2, s.y2);
+
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2 + Math.random() * 2;
+                ctx.shadowColor = '#38bdf8';
+                ctx.shadowBlur = 15;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                s.life--;
+                if (s.life <= 0) sparks.splice(i, 1);
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        window.onload = function () {
+            resizeCanvas();
+            animate();
+        };
+
+        function copyKDPText() {
+            const rawCode = document.getElementById('kdp-code-block').innerText;
+            const tempElem = document.createElement('textarea');
+            tempElem.value = rawCode;
+            document.body.appendChild(tempElem);
+            tempElem.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempElem);
+            alert("Amazon KDP HTML-Code wurde in die Zwischenablage kopiert!");
+        }
+    </script>
+</body>
+</html>

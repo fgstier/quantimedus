@@ -1,0 +1,900 @@
+﻿<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS QUANTENKOMPLOTT II - F.G. Stier</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,400&family=Share+Tech+Mono&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        metal: {
+                            950: '#060709',
+                            900: '#0a0c10',
+                            850: '#0f1218',
+                            800: '#141822',
+                            700: '#1e2433',
+                            600: '#2b3448',
+                            500: '#404d69'
+                        },
+                        brass: {
+                            100: '#fff7d1',
+                            200: '#fff0a6',
+                            300: '#fbe278',
+                            400: '#f5cd47',
+                            500: '#e6c670', // Polished Brass
+                            600: '#c5a059',
+                            700: '#98773c',
+                            800: '#6d5328',
+                            900: '#473518'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Chakra Petch', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0c10;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(230, 198, 112, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                linear-gradient(to bottom, rgba(10, 12, 16, 0.95), rgba(6, 7, 9, 0.98)),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Technical 3D Brass Text Effect */
+        .text-3d-brass {
+            color: #f5cd47;
+            background: linear-gradient(180deg, #fff2a8 0%, #e6c670 45%, #98773c 80%, #fff0a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 
+                0px 2px 0px #6d5328,
+                0px 4px 0px #473518,
+                0px 6px 10px rgba(0, 0, 0, 0.9),
+                0px 0px 25px rgba(230, 198, 112, 0.4);
+            filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.8));
+        }
+
+        .text-brass-subtle {
+            background: linear-gradient(180deg, #fbe278 0%, #c5a059 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Dark Metal Card with Metallic Beveled Borders */
+        .metal-panel {
+            background: linear-gradient(135deg, rgba(30, 36, 51, 0.6) 0%, rgba(15, 18, 24, 0.9) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            box-shadow: 
+                inset 1px 1px 0px rgba(255, 240, 166, 0.15),
+                inset -1px -1px 0px rgba(0, 0, 0, 0.8),
+                0 10px 30px -5px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            position: relative;
+        }
+
+        .metal-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(230, 198, 112, 0.5), transparent);
+        }
+
+        /* Cybernetic Cut Corners */
+        .cyber-corner {
+            clip-path: polygon(
+                0 12px, 12px 0, 
+                calc(100% - 12px) 0, 100% 12px, 
+                100% calc(100% - 12px), calc(100% - 12px) 100%, 
+                12px 100%, 0 calc(100% - 12px)
+            );
+        }
+
+        /* Glowing Brass Buttons */
+        .btn-brass {
+            background: linear-gradient(180deg, #f5cd47 0%, #c5a059 60%, #98773c 100%);
+            color: #060709;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            border: 1px solid #fff2a8;
+            box-shadow: 
+                0 0 15px rgba(230, 198, 112, 0.3),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+            transition: all 0.2s ease;
+        }
+
+        .btn-brass:hover {
+            background: linear-gradient(180deg, #fff0a6 0%, #e6c670 60%, #c5a059 100%);
+            box-shadow: 
+                0 0 25px rgba(230, 198, 112, 0.6),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-brass-outline {
+            background: rgba(15, 18, 24, 0.8);
+            color: #e6c670;
+            font-family: 'Chakra Petch', sans-serif;
+            border: 1px solid #c5a059;
+            box-shadow: inset 0 0 10px rgba(197, 160, 89, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .btn-brass-outline:hover {
+            background: rgba(197, 160, 89, 0.15);
+            border-color: #f5cd47;
+            color: #fff7d1;
+            box-shadow: 0 0 15px rgba(230, 198, 112, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .spotlight-overlay {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 198, 112, 0.05), transparent 40%);
+            transition: opacity 0.3s;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0c10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b3448;
+            border: 1px solid #6d5328;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c5a059;
+        }
+		
+ @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}		
+		.animate-spin-slow {
+    animation: spinSlow 8s linear infinite;
+}
+		
+    </style>
+    <link rel="preload" as="image" href="/wappen.jpg">
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brass-500 selection:text-metal-950">
+
+    <!-- Spotlight effect element -->
+    <div id="spotlight" class="spotlight-overlay"></div>
+
+    <header class="sticky top-0 z-50 bg-metal-950/90 backdrop-blur-md border-b border-brass-600/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded bg-metal-850 border border-brass-500/60 flex items-center justify-center shadow-lg shadow-brass-500/10">
+                    <i class="fa-solid fa-rotate text-brass-400 text-xl animate-spin-slow"></i>
+                </div>
+                <div>
+                    <span class="font-tech text-2xl font-bold tracking-wider text-3d-brass">QUANTENKOMPLOTT II</span>
+                    <span class="hidden sm:inline-block text-xs font-mono text-brass-600 block -mt-1 tracking-widest">INFLUENZ // METALL-SEKTOREN // ARTEFAKTE</span>
+                </div>
+            </div>
+
+            <!-- Series Switcher -->
+            <div class="hidden lg:flex items-center space-x-2 font-tech text-xs">
+                <span class="text-gray-500 font-mono mr-2">SERIE:</span>
+                <span class="px-2.5 py-1 rounded bg-metal-850 text-gray-400 border border-metal-700 opacity-60">Band I</span>
+                <span class="px-2.5 py-1 rounded bg-brass-600/20 text-brass-300 border border-brass-500 font-bold">Band II (Aktiv)</span>
+                <span class="px-2.5 py-1 rounded bg-metal-850 text-gray-400 border border-metal-700 opacity-60">Band III</span>
+                <span class="px-2.5 py-1 rounded bg-metal-850 text-gray-400 border border-metal-700 opacity-60">Band IV</span>
+            </div>
+
+            <nav class="hidden md:flex space-x-6 font-tech text-sm tracking-wider">
+                <a href="#hero" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-bolt text-xs text-brass-500"></i> Start</a>
+                <a href="#sim-section" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-gears text-xs text-brass-500"></i> Influenz-Maschine</a>
+                <a href="#toc-section" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-list-ol text-xs text-brass-500"></i> Inhaltsverzeichnis</a>
+                <a href="#kdp-section" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-code text-xs text-brass-500"></i> Amazon HTML</a>
+			    <a href="quantimedus.html" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-bolt text-xs text-brass-500"></i>Band I-IV</a>
+		   </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#kdp-section" class="btn-brass px-4 py-2 text-xs rounded uppercase tracking-wider cyber-corner">
+                    <i class="fa-solid fa-book-open mr-1"></i> Band II Details
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <section id="hero" class="relative pt-12 pb-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-metal-850/90 border border-brass-600/40 mb-8 shadow-inner">
+                    <span class="text-brass-400 font-mono text-xs uppercase tracking-widest"><i class="fa-solid fa-feather-pointed mr-2"></i>F.G. Stier • Das Quantenkomplott II</span>
+                </div>
+
+                <div class="metal-panel p-8 sm:p-14 rounded-2xl max-w-5xl mx-auto cyber-corner my-4">
+                    <h1 class="font-tech text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-3d-brass mb-4">
+                        DAS QUANTENKOMPLOTT II
+                    </h1>
+                    <p class="font-tech text-lg sm:text-2xl font-medium text-brass-subtle tracking-wide max-w-3xl mx-auto border-t border-b border-brass-600/20 py-3 my-4">
+                        Das Drama der Artefakte & Die Mechanik der Influenz-Maschinen
+                    </p>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mt-6 font-sans">
+                        Warum drehen sich zwei Scheiben gegenläufig? Welches Geheimnis bergen die Metall-Sektoren, die Neutralisator-Bürsten und die Leidener Flaschen? F.G. Stier legt die physikalischen Artefakte und Trugschlüsse der klassischen Influenz-Maschinen schonungslos offen.
+                    </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#sim-section" class="btn-brass px-8 py-3.5 text-sm uppercase rounded cyber-corner w-full sm:w-auto flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Influenz-Maschine Starten
+                        </a>
+                        <a href="#toc-section" class="btn-brass-outline px-8 py-3.5 text-sm uppercase rounded cyber-corner w-full sm:w-auto flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-list"></i> 14 Kapitel Erkunden
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Technical parameters -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mt-8 font-mono text-xs">
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Hauptthema</div>
+                        <div class="text-brass-400 font-bold mt-1">Influenz-Elektrostatik</div>
+                    </div>
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Komponenten</div>
+                        <div class="text-brass-400 font-bold mt-1">Sektoren & Bürsten</div>
+                    </div>
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Paradoxon</div>
+                        <div class="text-brass-400 font-bold mt-1">Zweimal Drehen</div>
+                    </div>
+                    <div class="metal-panel p-3 rounded text-center">
+                        <div class="text-gray-500 uppercase">Kondensator</div>
+                        <div class="text-sky-400 font-bold mt-1">Leidener Flaschen</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sim-section" class="py-16 bg-metal-900 border-t border-b border-brass-600/20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                    <div>
+                        <div class="text-xs font-mono text-brass-500 uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-gears"></i> Interaktive Machine-Demontage
+                        </div>
+                        <h2 class="font-tech text-3xl sm:text-4xl font-bold text-3d-brass mt-1">
+                            Die Influenz-Maschine im Detail
+                        </h2>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">
+                        Steuern Sie die Rotation der Drehplatten, die Neutralisator-Bürsten und lösen Sie Hochspannungs-Entladungen an den Funkenkugeln aus.
+                    </p>
+                </div>
+
+                <div class="metal-panel rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden border border-brass-600/40">
+                    
+                    <!-- Control Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 pb-4 mb-4 border-b border-metal-700/80 font-tech text-xs">
+                        <div class="flex items-center gap-2">
+                            <button id="btn-toggle-spin" onclick="toggleSpin()" class="px-4 py-2 rounded btn-brass text-xs flex items-center gap-1.5">
+                                <i id="spin-icon" class="fa-solid fa-pause"></i> <span id="spin-btn-text">Rotation Stoppen</span>
+                            </button>
+                            <button onclick="toggleBrushes()" id="btn-brushes" class="px-3 py-2 rounded btn-brass-outline text-xs">
+                                <i class="fa-solid fa-broom mr-1"></i> Bürsten: AN
+                            </button>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <label class="flex items-center gap-2 text-gray-300 font-mono">
+                                <span>Drehzahl (U/min):</span>
+                                <input type="range" id="speed-slider" min="1" max="10" value="5" class="accent-brass-500 w-28">
+                            </label>
+                            <button onclick="triggerSpark()" class="btn-brass px-4 py-2 rounded text-xs bg-sky-600 border-sky-400">
+                                <i class="fa-solid fa-bolt mr-1"></i> Funke Auslösen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Canvas -->
+                    <div class="relative w-full h-[480px] bg-metal-950 rounded-xl overflow-hidden border border-metal-700/60 shadow-inner">
+                        <canvas id="influenzCanvas" class="w-full h-full cursor-pointer"></canvas>
+                        
+                        <div class="absolute bottom-3 left-3 pointer-events-none font-mono text-[11px] text-brass-500/90 bg-metal-950/90 px-3 py-1.5 rounded border border-metal-800">
+                            <span id="sim-status"><i class="fa-solid fa-gauge-high mr-1"></i> INFLUENZ-GENERATOR: DREHUNG AKTIV // SPANNUNGSSPEICHERUNG</span>
+                        </div>
+                        <div class="absolute top-3 right-3 pointer-events-none font-mono text-[11px] text-gray-400 bg-metal-950/90 px-3 py-1.5 rounded border border-metal-800">
+                            <i class="fa-solid fa-hand-pointer text-brass-400 mr-1"></i> Klick auf Kugeln = Entladung
+                        </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs text-gray-400 pt-2">
+                        <div class="flex items-center gap-2 bg-metal-850/60 p-2.5 rounded border border-metal-700">
+                            <div class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_#f5cd47]"></div>
+                            <span>Metall-Sektoren (Messing)</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-metal-850/60 p-2.5 rounded border border-metal-700">
+                            <div class="w-3 h-3 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]"></div>
+                            <span>Neutralisator & Bürsten</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-metal-850/60 p-2.5 rounded border border-metal-700">
+                            <div class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></div>
+                            <span>Abnehmer-Kämme</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-metal-850/60 p-2.5 rounded border border-metal-700">
+                            <div class="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]"></div>
+                            <span>Leidener Flaschen</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="toc-section" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono text-brass-500 uppercase tracking-widest"><i class="fa-solid fa-list-check"></i> Inhaltsverzeichnis</span>
+                    <h2 class="font-tech text-4xl sm:text-5xl font-bold text-3d-brass mt-2">
+                        Das Quantenkomplott II – Struktur
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base mt-4">
+                        Wählen Sie ein Kapitel aus, um die detaillierte mechanische Zerlegung einzusehen.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Table of Contents Scrollable List -->
+                    <div class="lg:col-span-6 space-y-2.5 font-mono text-sm max-h-[600px] overflow-y-auto pr-2">
+                        
+                        <div onclick="showChapter('c1')" id="toc-c1" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-brass-500 bg-metal-800/80 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 1</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Das Drama der Artefakte</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 7</span>
+                        </div>
+
+                        <div onclick="showChapter('c2')" id="toc-c2" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 2</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Der Funkengenerator und das Rotations-Paradoxon</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 18</span>
+                        </div>
+
+                        <div onclick="showChapter('c3')" id="toc-c3" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 3</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Influenz</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 28</span>
+                        </div>
+
+                        <div onclick="showChapter('c4')" id="toc-c4" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 4</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Das Elektron</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 41</span>
+                        </div>
+
+                        <div onclick="showChapter('c5')" id="toc-c5" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 5</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Zweimal drehen, nichts verstehen</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 48</span>
+                        </div>
+
+                        <div onclick="showChapter('c6')" id="toc-c6" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 6</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Die Metall-Sektoren</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 58</span>
+                        </div>
+
+                        <div onclick="showChapter('c7')" id="toc-c7" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 7</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Die Drehplatten</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 60</span>
+                        </div>
+
+                        <div onclick="showChapter('c8')" id="toc-c8" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 8</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Die Neutralisatoren</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 61</span>
+                        </div>
+
+                        <div onclick="showChapter('c9')" id="toc-c9" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 9</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Die Bürsten an den Neutralisatoren</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 62</span>
+                        </div>
+
+                        <div onclick="showChapter('c10')" id="toc-c10" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 10</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Die Kämme</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 63</span>
+                        </div>
+
+                        <div onclick="showChapter('c11')" id="toc-c11" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 11</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Leidener Flaschen & Kugeln</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 64</span>
+                        </div>
+
+                        <div onclick="showChapter('c12')" id="toc-c12" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 12</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Die Kugeln</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 67</span>
+                        </div>
+
+                        <div onclick="showChapter('c13')" id="toc-c13" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 13</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Der Teufel steckt im Glas</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 71</span>
+                        </div>
+
+                        <div onclick="showChapter('c14')" id="toc-c14" class="metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all">
+                            <div>
+                                <div class="text-xs text-brass-500 font-bold">KAPITEL 14</div>
+                                <div class="text-gray-200 font-sans font-bold text-sm mt-0.5">Die Funktion</div>
+                            </div>
+                            <span class="text-brass-400 font-bold bg-metal-950 px-2 py-0.5 rounded border border-metal-700 text-xs">S. 74</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Chapter Detail Display Card -->
+                    <div class="lg:col-span-6">
+                        <div class="metal-panel p-8 rounded-xl cyber-corner min-h-[420px] flex flex-col justify-between border border-brass-500/40">
+                            <div>
+                                <div class="flex items-center justify-between border-b border-brass-600/30 pb-3 mb-4">
+                                    <span id="chapter-tag" class="font-mono text-xs text-brass-400 font-bold uppercase">KAPITEL 1 // METALLARTEFAKTE</span>
+                                    <span id="chapter-page" class="font-mono text-xs text-gray-500">SEITE 7</span>
+                                </div>
+                                <h3 id="chapter-title" class="font-tech text-2xl font-bold text-brass-200 mb-4">
+                                    Das Drama der Artefakte
+                                </h3>
+                                <p id="chapter-desc" class="text-gray-300 text-sm leading-relaxed font-sans">
+                                    Physikalische Messgeräte und Generatoren erzeugen oft Nebeneffekte, die fälschlicherweise als Grundgesetze interpretiert werden. Dieses Kapitel analysiert das Entstehen solcher physikalischen 'Artefakte' und legt den Grundstein für die fehlerfreie Rekonstruktion der Influenz-Mechanik.
+                                </p>
+                            </div>
+
+                            <div class="mt-8 pt-4 border-t border-metal-700/60 flex items-center justify-between text-xs font-mono">
+                                <span class="text-brass-600"><i class="fa-solid fa-microchip mr-1"></i> FELDMECHANIK BAND II</span>
+                                <span class="text-gray-400">AUTOR: F.G. STIER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="kdp-section" class="py-16 bg-metal-900 border-t border-brass-600/30">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="metal-panel p-6 sm:p-10 rounded-2xl cyber-corner border border-brass-500/50">
+                    
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <span class="text-xs font-mono text-brass-500 uppercase tracking-widest"><i class="fa-brands fa-amazon text-brass-400 mr-1"></i> Verlags- & Marketing-Tool</span>
+                            <h3 class="font-tech text-2xl font-bold text-3d-brass mt-1">
+                                Amazon Buchbeschreibung für Band II (HTML)
+                            </h3>
+                        </div>
+                        <button onclick="copyKDPText()" class="btn-brass px-5 py-2.5 text-xs rounded cyber-corner flex items-center gap-2">
+                            <i class="fa-solid fa-copy"></i> HTML Code Kopieren
+                        </button>
+                        <a href="https://www.amazon.de/dp/3912752176"  target="_blank" rel="noopener noreferrer" class="btn-brass px-4 py-2 text-xs rounded uppercase tracking-wider cyber-corner">
+                           <i class="fa-solid fa-copy">  </i> erhältlich auf Amazon
+                        </a>
+                    </div>
+
+                    <div class="relative bg-metal-950 rounded-lg p-4 font-mono text-xs text-brass-300/90 border border-metal-700 overflow-x-auto max-h-64">
+                        <pre id="kdp-code-block" class="whitespace-pre-wrap leading-relaxed">&lt;p&gt;&lt;b&gt;Die Rekonstruktion der Influenz: Eine radikale Demontage physikalischer Artefakte.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;In &lt;b&gt;»Das Quantenkomplott II: Das Drama der Artefakte«&lt;/b&gt; wendet sich F.G. Stier den legendären Influenz-Maschinen und dem Phänomen der Ladungstrennung ohne Reibung zu. Weshalb benötigen Wimshurst-Maschinen zwei sich gegeneinander drehende Glasscheiben? Welche Funktion erfüllen die Metall-Sektoren, Bürsten und Neutralisatoren wirklich?&lt;/p&gt;
+
+&lt;h3&gt;Aus dem Inhalt:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;Das Drama der Artefakte:&lt;/b&gt; Trugschlüsse und Messfehler der historischen Elektrostatik.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Der Funkengenerator & Rotations-Paradoxon:&lt;/b&gt; Das Rätsel der gegensinnigen Bewegung.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Influenz & Das Elektron:&lt;/b&gt; Kritische Analyse der Teilchenhypothese im elektrischen Feld.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Zweimal drehen, nichts verstehen:&lt;/b&gt; Die Ursache der Verwirrung bei historischen Erfindern.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Die Metall-Sektoren, Drehplatten & Neutralisatoren:&lt;/b&gt; Exakte Bauteil-Analyse.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Bürsten, Kämme & Leidener Flaschen:&lt;/b&gt; Ladungsübertrag, Feldkonzentration und Hochspannung.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Der Teufel steckt im Glas & Die Funktion:&lt;/b&gt; Die unerbittliche Mechanik hinter dem Funkenschlag.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ein Muss für jeden, der die Elektrostatik nicht als Ansammlung von Formeln, sondern als fassbares mechanisches System verstehen möchte.&lt;/p&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-metal-950 border-t border-brass-600/30 py-8 font-mono text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="font-tech text-base font-bold text-brass-400">QUANTENKOMPLOTT II</span>
+                <span class="block text-gray-500 text-xs">© F.G. Stier • Das Drama der Artefakte</span>
+            </div>
+            <div class="text-brass-600 flex gap-4">
+                <span>BAND II</span>
+                <span>•</span>
+                <span>INFLUENZ</span>
+                <span>•</span>
+                <span>WIMSHURST & BONETTI</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Spotlight Tracking ---
+        const spotlight = document.getElementById('spotlight');
+        window.addEventListener('pointermove', (e) => {
+            spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+            spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+
+        // --- Chapter Data ---
+        const chapterData = {
+            c1: {
+                tag: "KAPITEL 1 // METALLARTEFAKTE",
+                page: "SEITE 7",
+                title: "Das Drama der Artefakte",
+                desc: "Physikalische Messgeräte und Generatoren erzeugen oft Nebeneffekte, die fälschlicherweise als Grundgesetze interpretiert werden. Dieses Kapitel analysiert das Entstehen solcher physikalischen 'Artefakte' und legt den Grundstein für die fehlerfreie Rekonstruktion der Influenz-Mechanik."
+            },
+            c2: {
+                tag: "KAPITEL 2 // PARADOXON",
+                page: "SEITE 18",
+                title: "Der Funkengenerator und das Rotations-Paradoxon",
+                desc: "Warum erzeugen zwei rotierende Platten Funken, während eine einzelne isolierte Platte wirkungslos bleibt? Die Demontage des Rotations-Paradoxons führt uns direkt in die innere Geometrie des elektrische Feldes."
+            },
+            c3: {
+                tag: "KAPITEL 3 // FELDDYNAMIK",
+                page: "SEITE 28",
+                title: "Influenz",
+                desc: "Neudefinition der elektrostatischen Induktion. Nicht spukhafte Fernwirkung oder mystische Ladungsverschiebung, sondern ein verdrängungsmechanischer Prozess in der Umgebungsstruktur."
+            },
+            c4: {
+                tag: "KAPITEL 4 // TEILCHENKRITIK",
+                page: "SEITE 41",
+                title: "Das Elektron",
+                desc: "Kritische Gegenüberstellung des historischen Elektronenbegriffs mit den tatsächlichen Beobachtungsdaten in Hochspannungsversuchen. Wo die Punktladungshypothese versagt."
+            },
+            c5: {
+                tag: "KAPITEL 5 // IRRTUMSANALYSE",
+                page: "SEITE 48",
+                title: "Zweimal drehen, nichts verstehen",
+                desc: "Eine rhetorische und wissenschaftshistorische Reise durch die Irrtümer klassischer Physiklehrbücher zur Wimshurst-Maschine. Warum doppelte Rotation oft falsch begründet wird."
+            },
+            c6: {
+                tag: "KAPITEL 6 // BAUTEIL I",
+                page: "SEITE 58",
+                title: "Die Metall-Sektoren",
+                desc: "Messingsegmente auf den Glasscheiben: Ihre exakte Funktion als kapazitive Zwischenspeicher und Feldverstärker im Induktionskreislauf."
+            },
+            c7: {
+                tag: "KAPITEL 7 // BAUTEIL II",
+                page: "SEITE 60",
+                title: "Die Drehplatten",
+                desc: "Glas, Ebonit oder Schellack? Der Einfluss der rotierenden Dielektrikumsscheiben auf die Feldkonzentration und Durchschlagsfestigkeit."
+            },
+            c8: {
+                tag: "KAPITEL 8 // BAUTEIL III",
+                page: "SEITE 61",
+                title: "Die Neutralisatoren",
+                desc: "Der leitende Querstab als schlüsselhaftes Relais. Warum ohne den definierten Kurzschlussweg über den Neutralisator keine kontinuierliche Influenz möglich ist."
+            },
+            c9: {
+                tag: "KAPITEL 9 // BAUTEIL IV",
+                page: "SEITE 62",
+                title: "Die Bürsten an den Neutralisatoren",
+                desc: "Feine Feinsilber- oder Messingdrähte als galvanische Kontaktpunkte. Die Beseitigung von Luftspalt-Widerständen im Zündmoment."
+            },
+            c10: {
+                tag: "KAPITEL 10 // BAUTEIL V",
+                page: "SEITE 63",
+                title: "Die Kämme",
+                desc: "Spitzenentladung und Ladungsabnahme: Wie die metallischen Abnehmerkämme das Feld von den Sektoren abgreifen und den Hauptkondensatoren zuführen."
+            },
+            c11: {
+                tag: "KAPITEL 11 // SPEICHERUNG",
+                page: "SEITE 64",
+                title: "Leidener Flaschen & Kugeln",
+                desc: "Die Energiespeicher der Influenzmaschine. Das Zusammenspiel aus Glaskapazität und kugelförmigen Entladungselektroden für maximale Funkenenergie."
+            },
+            c12: {
+                tag: "KAPITEL 12 // ELEKTRODEN",
+                page: "SEITE 67",
+                title: "Die Kugeln",
+                desc: "Geometrische Radien der Funkenstrecke. Warum unterschiedliche Kugelgrößen den Feldgradienten und die Überschlagspannung maßgeblich bestimmen."
+            },
+            c13: {
+                tag: "KAPITEL 13 // DIELEKTRIKUM",
+                page: "SEITE 71",
+                title: "Der Teufel steckt im Glas",
+                desc: "Oberflächenfeuchtigkeit, Restpolarisation und Glashysteresen. Die verborgenen Störgrößen, die historische Versuchsergebnisse oft verfälschten."
+            },
+            c14: {
+                tag: "KAPITEL 14 // SYNTHESE",
+                page: "SEITE 74",
+                title: "Die Funktion",
+                desc: "Das Gesamtsystem in perfekter Synchronisation: Die vollständige, logische und lückenlose Rekonstruktion der Influenz-Generator-Mechanik."
+            }
+        };
+
+        function showChapter(id) {
+            const data = chapterData[id];
+            document.getElementById('chapter-tag').innerText = data.tag;
+            document.getElementById('chapter-page').innerText = data.page;
+            document.getElementById('chapter-title').innerText = data.title;
+            document.getElementById('chapter-desc').innerText = data.desc;
+
+            Object.keys(chapterData).forEach(k => {
+                const el = document.getElementById(`toc-${k}`);
+                if (k === id) {
+                    el.className = "metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-brass-500 bg-metal-800/80 cursor-pointer transition-all";
+                } else {
+                    el.className = "metal-panel p-3.5 rounded-lg flex items-center justify-between border-l-4 border-l-transparent hover:border-l-brass-500 hover:bg-metal-800 cursor-pointer transition-all";
+                }
+            });
+        }
+
+        // --- Influenz Machine Simulator ---
+        const canvas = document.getElementById('influenzCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let isSpinning = true;
+        let showBrushes = true;
+        let speed = 5;
+        let angle = 0;
+        let sparkLife = 0;
+
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            width = canvas.width;
+            height = canvas.height;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        document.getElementById('speed-slider').addEventListener('input', (e) => {
+            speed = parseInt(e.target.value);
+        });
+
+        function toggleSpin() {
+            isSpinning = !isSpinning;
+            const btnText = document.getElementById('spin-btn-text');
+            const icon = document.getElementById('spin-icon');
+            if (isSpinning) {
+                btnText.innerText = 'Rotation Stoppen';
+                icon.className = 'fa-solid fa-pause';
+            } else {
+                btnText.innerText = 'Rotation Starten';
+                icon.className = 'fa-solid fa-play';
+            }
+        }
+
+        function toggleBrushes() {
+            showBrushes = !showBrushes;
+            const btn = document.getElementById('btn-brushes');
+            btn.innerHTML = showBrushes ? '<i class="fa-solid fa-broom mr-1"></i> Bürsten: AN' : '<i class="fa-solid fa-broom mr-1 text-gray-500"></i> Bürsten: AUS';
+        }
+
+        function triggerSpark() {
+            sparkLife = 18;
+        }
+
+        canvas.addEventListener('click', (e) => {
+            triggerSpark();
+        });
+
+        function drawInfluenzMachine() {
+            const centerX = width * 0.5;
+            const centerY = height * 0.48;
+            const discRadius = Math.min(width, height) * 0.32;
+            const sectorCount = 12;
+
+            // Base stand
+            ctx.fillStyle = '#141822';
+            ctx.strokeStyle = '#404d69';
+            ctx.lineWidth = 2;
+            ctx.fillRect(centerX - 120, centerY + discRadius + 10, 240, 20);
+            ctx.strokeRect(centerX - 120, centerY + discRadius + 10, 240, 20);
+
+            // Leyden Jars (Left & Right)
+            ctx.fillStyle = '#1e2433';
+            ctx.fillRect(centerX - 160, centerY + 30, 40, 90);
+            ctx.fillRect(centerX + 120, centerY + 30, 40, 90);
+            ctx.strokeStyle = '#c5a059';
+            ctx.strokeRect(centerX - 160, centerY + 30, 40, 90);
+            ctx.strokeRect(centerX + 120, centerY + 30, 40, 90);
+
+            // Disc 1 (Clockwise) Glass
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, discRadius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(230, 240, 255, 0.05)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(230, 198, 112, 0.4)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw Metallic Sectors on Disc 1
+            for (let i = 0; i < sectorCount; i++) {
+                let secAngle = angle + (i * (Math.PI * 2 / sectorCount));
+                let sx = centerX + Math.cos(secAngle) * (discRadius * 0.75);
+                let sy = centerY + Math.sin(secAngle) * (discRadius * 0.75);
+
+                ctx.beginPath();
+                ctx.arc(sx, sy, 8, 0, Math.PI * 2);
+                ctx.fillStyle = (i % 2 === 0) ? '#f5cd47' : '#c5a059';
+                ctx.shadowColor = '#f5cd47';
+                ctx.shadowBlur = 6;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            // Neutralizer Bar & Brushes
+            if (showBrushes) {
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(centerX - Math.cos(Math.PI/4) * (discRadius * 0.8), centerY - Math.sin(Math.PI/4) * (discRadius * 0.8));
+                ctx.lineTo(centerX + Math.cos(Math.PI/4) * (discRadius * 0.8), centerY + Math.sin(Math.PI/4) * (discRadius * 0.8));
+                ctx.stroke();
+
+                // Brush ends
+                ctx.fillStyle = '#38bdf8';
+                ctx.beginPath();
+                ctx.arc(centerX - Math.cos(Math.PI/4) * (discRadius * 0.8), centerY - Math.sin(Math.PI/4) * (discRadius * 0.8), 5, 0, Math.PI*2);
+                ctx.arc(centerX + Math.cos(Math.PI/4) * (discRadius * 0.8), centerY + Math.sin(Math.PI/4) * (discRadius * 0.8), 5, 0, Math.PI*2);
+                ctx.fill();
+            }
+
+            // Pick-up Combs (Left & Right)
+            ctx.strokeStyle = '#34d399';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(centerX - discRadius - 15, centerY);
+            ctx.lineTo(centerX - discRadius + 15, centerY);
+            ctx.moveTo(centerX + discRadius - 15, centerY);
+            ctx.lineTo(centerX + discRadius + 15, centerY);
+            ctx.stroke();
+
+            // Spark Gap Spheres
+            const gapLeftX = centerX - 35;
+            const gapRightX = centerX + 35;
+            const gapY = centerY - discRadius - 30;
+
+            // Connecting rods to spark spheres
+            ctx.strokeStyle = '#e6c670';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(centerX - discRadius, centerY);
+            ctx.lineTo(centerX - discRadius, gapY);
+            ctx.lineTo(gapLeftX, gapY);
+            
+            ctx.moveTo(centerX + discRadius, centerY);
+            ctx.lineTo(centerX + discRadius, gapY);
+            ctx.lineTo(gapRightX, gapY);
+            ctx.stroke();
+
+            // Spark Spheres
+            ctx.beginPath();
+            ctx.arc(gapLeftX, gapY, 14, 0, Math.PI * 2);
+            ctx.arc(gapRightX, gapY, 10, 0, Math.PI * 2);
+            ctx.fillStyle = '#f5cd47';
+            ctx.shadowColor = '#f5cd47';
+            ctx.shadowBlur = 10;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Spark discharge effect
+            if (sparkLife > 0) {
+                ctx.beginPath();
+                ctx.moveTo(gapLeftX + 14, gapY);
+                
+                let segments = 6;
+                for (let i = 1; i < segments; i++) {
+                    let nx = gapLeftX + 14 + (gapRightX - 10 - (gapLeftX + 14)) * (i / segments);
+                    let ny = gapY + (Math.random() - 0.5) * 20;
+                    ctx.lineTo(nx, ny);
+                }
+                ctx.lineTo(gapRightX - 10, gapY);
+
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 3;
+                ctx.shadowColor = '#38bdf8';
+                ctx.shadowBlur = 20;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                sparkLife--;
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(10, 12, 16, 0.35)';
+            ctx.fillRect(0, 0, width, height);
+
+            if (isSpinning) {
+                angle += (speed * 0.008);
+            }
+
+            drawInfluenzMachine();
+
+            // Auto trigger spark occasionally when spinning
+            if (isSpinning && Math.random() < 0.02 * (speed / 5)) {
+                sparkLife = 10;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        window.onload = function () {
+            resizeCanvas();
+            animate();
+        };
+
+        function copyKDPText() {
+            const rawCode = document.getElementById('kdp-code-block').innerText;
+            const tempElem = document.createElement('textarea');
+            tempElem.value = rawCode;
+            document.body.appendChild(tempElem);
+            tempElem.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempElem);
+            alert("Amazon KDP HTML-Code für Band II wurde in die Zwischenablage kopiert!");
+        }
+    </script>
+</body>
+</html>

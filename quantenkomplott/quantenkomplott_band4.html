@@ -1,0 +1,743 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Quantenkomplott IV – Das Drama der Schule</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        metal: {
+                            900: '#0a0c10',
+                            800: '#121620',
+                            700: '#1a202c',
+                            600: '#2d3748',
+                        },
+                        brass: {
+                            light: '#f5e5a3',
+                            DEFAULT: '#e6c670',
+                            dark: '#b8860b',
+                            deep: '#8b6508',
+                        },
+                        cyanPulse: '#00f0ff',
+                    },
+                    fontFamily: {
+                        mono: ['Courier New', 'Consolas', 'monospace'],
+                        sans: ['Inter', 'Segoe UI', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0c10;
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(230, 198, 112, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
+                linear-gradient(to bottom, #0a0c10, #121620);
+            background-attachment: fixed;
+        }
+
+        /* 3D Polished Brass Metallic Text Effect */
+        .brass-3d-text {
+            color: #e6c670;
+            background: linear-gradient(135deg, #fff7d6 0%, #e6c670 40%, #b8860b 70%, #5c4002 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 
+                0 1px 0 #b8860b,
+                0 2px 0 #9e7309,
+                0 3px 0 #856007,
+                0 4px 0 #6c4e05,
+                0 5px 10px rgba(0, 0, 0, 0.9),
+                0 0 20px rgba(230, 198, 112, 0.3);
+            filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.8));
+        }
+
+        /* Dark Brushed Metal Card Styling */
+        .metal-card {
+            background: linear-gradient(145deg, #161c28, #0e121a);
+            border: 1px solid rgba(230, 198, 112, 0.25);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.08),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.8),
+                0 10px 25px -5px rgba(0, 0, 0, 0.7);
+            border-radius: 0.75rem;
+        }
+
+        .metal-card-glow {
+            border-color: rgba(230, 198, 112, 0.5);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.15),
+                0 0 20px rgba(230, 198, 112, 0.15);
+        }
+
+        /* Brass Button */
+        .btn-brass {
+            background: linear-gradient(180deg, #f5e5a3 0%, #d4af37 50%, #9e7309 100%);
+            color: #0a0c10;
+            font-weight: 700;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+            border: 1px solid #b8860b;
+            transition: all 0.2s ease;
+        }
+
+        .btn-brass:hover {
+            background: linear-gradient(180deg, #ffffff 0%, #e6c670 50%, #b8860b 100%);
+            transform: translateY(-1px);
+            box-shadow: 
+                0 6px 12px rgba(230, 198, 112, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-brass:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+		
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0c10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3748;
+            border-radius: 4px;
+            border: 1px solid rgba(230, 198, 112, 0.3);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e6c670;
+        }
+		
+		.text-3d-brass {
+            color: #f5cd47;
+            background: linear-gradient(180deg, #fff2a8 0%, #e6c670 45%, #98773c 80%, #fff0a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 
+                0px 2px 0px #6d5328,
+                0px 4px 0px #473518,
+                0px 6px 10px rgba(0, 0, 0, 0.9),
+                0px 0px 25px rgba(230, 198, 112, 0.4);
+            filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.8));
+        }
+		
+	 @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+    animation: spinSlow 8s linear infinite;
+}
+
+    </style>
+    <link rel="preload" as="image" href="/wappen.jpg">
+</head>
+<body class="min-h-screen font-sans antialiased selection:bg-brass-dark selection:text-white">
+
+<!-- Spotlight effect element -->
+    <div id="spotlight" class="spotlight-overlay"></div>
+<header class="sticky top-0 z-50 bg-metal-950/90 backdrop-blur-md border-b border-brass-600/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+        
+        <!-- 1. Logo & Titel -->
+        <div class="flex items-center space-x-3 flex-shrink-0">
+            <div class="w-10 h-10 rounded bg-metal-850 border border-brass-500/60 flex items-center justify-center shadow-lg shadow-brass-500/10">
+                <i class="fa-solid fa-rotate text-xl animate-spin-slow" style="color: #e6c670;"></i>
+            </div>
+            <div>
+                <span class="font-tech text-xl sm:text-2xl font-bold tracking-wider text-3d-brass block">QUANTENKOMPLOTT IV</span>
+                <span class="hidden sm:block text-xs font-mono text-brass-600 -mt-1 tracking-widest">Kybernetisches Archiv</span>
+            </div>
+        </div>
+
+        <!-- 2. Series Switcher (Der war im letzten HTML-Schnipsel verschwunden) -->
+<!-- Series Switcher -->
+            <div class="hidden lg:flex items-center space-x-2 font-tech text-xs">
+                <span class="text-gray-500 font-mono mr-2">SERIE:</span>
+                <span class="px-2.5 py-1 rounded bg-metal-850 text-gray-400 border border-metal-700 opacity-60">Band I</span>
+                <span class="px-2.5 py-1 rounded bg-metal-850 text-gray-400 border border-metal-700 opacity-60">Band II</span>
+                <span class="px-2.5 py-1 rounded bg-metal-850 text-gray-400 border border-metal-700 opacity-60">Band III</span>
+                 <span class="px-2.5 py-1 rounded bg-metal-800 border border-brass-500 font-bold" style="color: #f5cd47;">Band IV  (Aktiv)</span>
+            </div>
+			
+        <!-- 3. Navigation -->
+        <nav class="hidden md:flex items-center space-x-6 font-tech text-sm tracking-wider">
+            <a href="#toc" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-list-ol text-xs text-brass-500"></i> Inhaltsverzeichnis
+            </a>
+            <a href="quantimedus.html" class="text-gray-300 hover:text-brass-400 transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-xs text-brass-500"></i> Band I-IV
+            </a>
+        </nav>
+
+        <!-- 4. Action Button -->
+        <div class="flex items-center flex-shrink-0">
+            <a href="#toc" class="btn-brass px-3 sm:px-4 py-2 text-xs rounded uppercase tracking-wider cyber-corner flex items-center gap-1.5">
+                <i class="fa-solid fa-book-open"></i> 
+                <span class="hidden sm:inline">Band IV </span>Details
+            </a>
+        </div>
+
+    </div>
+</header>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <section class="relative text-center py-12 px-6 rounded-2xl metal-card overflow-hidden">
+            <!-- Background Decorative Grid Lines -->
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e6c670_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl mx-auto space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brass/10 border border-brass/30 text-brass text-xs font-mono tracking-wider uppercase">
+                    <span class="w-2 h-2 rounded-full bg-cyanPulse animate-pulse"></span>
+                    <span>Physikalisch-Kybernetische Monographie</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight uppercase brass-3d-text py-2">
+                    Das Quantenkomplott IV
+                </h1>
+
+                <h2 class="text-xl sm:text-3xl font-light text-slate-300 tracking-wide">
+                    — <span class="text-brass italic font-serif">Das Drama der Schule</span> —
+                </h2>
+
+                <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-sans">
+                    Eine kompromisslose Analyse der Raum-Tension, des Super-Kaskaden-Effekts im Marx-Generator und elektrohydrodynamischer Quincke-Rotationsmotoren ohne Magnete.
+                </p>
+
+                <div class="pt-4 flex flex-wrap justify-center gap-4 text-xs font-mono text-slate-300">
+                    <span class="px-3 py-1.5 rounded-md bg-metal-800 border border-brass/20">Seiten: 77</span>
+                    <span class="px-3 py-1.5 rounded-md bg-metal-800 border border-brass/20">Kapitel: 12</span>
+                    <span class="px-3 py-1.5 rounded-md bg-metal-800 border border-brass/20">Fokus: Hochspannung & Raum-Struktur</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="metal-card p-6 sm:p-8 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-brass/20 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-brass uppercase tracking-wider">Interaktives Laboratorium</span>
+                    <h3 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                        <span>Marx-Kaskade & Quincke-Rotations-Simulator</span>
+                    </h3>
+                </div>
+                <div class="flex items-center space-x-3 text-xs font-mono">
+                    <button id="modeMarxBtn" class="px-3 py-1.5 rounded bg-brass text-metal-900 font-bold transition">Marx-Generator</button>
+                    <button id="modeQuinckeBtn" class="px-3 py-1.5 rounded bg-metal-700 text-slate-300 hover:text-brass transition">Quincke-Rotation</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Canvas Screen -->
+                <div class="lg:col-span-2 bg-metal-900 border border-brass/30 rounded-xl p-2 relative overflow-hidden flex flex-col justify-center items-center min-h-[380px] shadow-inner">
+                    <canvas id="simCanvas" class="w-full h-80 rounded bg-metal-900 cursor-pointer"></canvas>
+                    <div id="canvasOverlay" class="absolute top-4 left-4 bg-metal-900/80 backdrop-blur px-3 py-1.5 rounded border border-brass/20 text-xs font-mono text-brass">
+                        Status: Bereit für Impuls
+                    </div>
+                </div>
+
+                <!-- Controls Panel -->
+                <div class="bg-metal-800/60 p-5 rounded-xl border border-brass/20 flex flex-col justify-between space-y-4">
+                    <div class="space-y-4">
+                        <h4 class="text-sm font-bold text-brass uppercase tracking-wider font-mono border-b border-brass/20 pb-2">Parameter-Steuerung</h4>
+
+                        <!-- Control 1 -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-mono">
+                                <label id="labelParam1" for="param1" class="text-slate-300">Ladespannung (kV)</label>
+                                <span id="valParam1" class="text-brass font-bold">50 kV</span>
+                            </div>
+                            <input type="range" id="param1" min="10" max="100" value="50" class="w-full accent-brass bg-metal-900 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Control 2 -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-mono">
+                                <label id="labelParam2" for="param2" class="text-slate-300">Stufenzahl / Kaskaden</label>
+                                <span id="valParam2" class="text-brass font-bold">6 Stufen</span>
+                            </div>
+                            <input type="range" id="param2" min="2" max="12" value="6" class="w-full accent-brass bg-metal-900 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Control 3 -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-mono">
+                                <label id="labelParam3" for="param3" class="text-slate-300">Flüssigkeits-Viskosität</label>
+                                <span id="valParam3" class="text-brass font-bold">Medium</span>
+                            </div>
+                            <input type="range" id="param3" min="1" max="10" value="5" class="w-full accent-brass bg-metal-900 h-2 rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <button id="triggerActionBtn" class="w-full py-3 rounded-lg btn-brass uppercase font-mono tracking-wider text-sm flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.57l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.57l7-10a1 1 0 011.12-.384z" clip-rule="evenodd"></path></svg>
+                            <span id="btnActionText">Kaskaden-Entladung zünden</span>
+                        </button>
+                        <p id="simDescription" class="text-[11px] text-slate-400 font-mono text-center leading-relaxed">
+                            Die Marx-Kaskade lädt Kondensatoren parallel und schaltet sie schlagartig über Funkenstrecken in Serie.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="toc" class="space-y-6">
+            <div class="text-center space-y-2">
+                <span class="text-xs font-mono text-brass uppercase tracking-widest">Gliederung & Struktur</span>
+                <h3 class="text-3xl font-black text-slate-100 uppercase tracking-tight">Inhaltsverzeichnis Band IV</h3>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-brass to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- TOC Item 1 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 01</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">DAS DRAMA DER SCHULE</h4>
+                        <p class="text-xs text-slate-400">Kritische Dekonstruktion überkommener Lehrmodelle & dogmatischer Physik.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 7</span>
+                </div>
+
+                <!-- TOC Item 2 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 02</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">WAS HABEN WIR BISHER GELERNT?</h4>
+                        <p class="text-xs text-slate-400">Synthese der Erkenntnisse aus Band I–III zur Raumdichte und Ätherspannung.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 13</span>
+                </div>
+
+                <!-- TOC Item 3 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 03</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">DER GLASWÜRFEL – GEPRESSTE VOLUMEN DES RAUMES</h4>
+                        <p class="text-xs text-slate-400">Geometrische Verdichtung des Raumgefüges und die Wirkung fester Dielektrika.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 15</span>
+                </div>
+
+                <!-- TOC Item 4 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 04</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">RAUM-TENSION – DIE WAHRE NATUR DES WIDERSTANDS</h4>
+                        <p class="text-xs text-slate-400">Ohm’scher Widerstand als mechanischer Gegendruck des Raumkontinuums.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 24</span>
+                </div>
+
+                <!-- TOC Item 5 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 05</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">DIE E-FUNKTION ALS WELLEN-RÜCKKOPPLUNG</h4>
+                        <p class="text-xs text-slate-400">Mathematische Herleitung von Exponentialfunktionen im Feedback des Feldes.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 41</span>
+                </div>
+
+                <!-- TOC Item 6 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 06</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">DER SUPER-KASKADEN-EFFEKT IM MARX-GENERATOR</h4>
+                        <p class="text-xs text-slate-400">Reihenschaltungs-Explosion durch Überschlag der Funkenstrecken.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 45</span>
+                </div>
+
+                <!-- TOC Item 7 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 07</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">ÜBERSICHT ÜBER DIE FUNKEN-BESCHREIBUNG</h4>
+                        <p class="text-xs text-slate-400">Klassifikation von Plasma-Entladungsformen und Ionisationskanälen.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 56</span>
+                </div>
+
+                <!-- TOC Item 8 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 08</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">DER QUINCKE-ROTATIONSEFFEKT</h4>
+                        <p class="text-xs text-slate-400">Flüssige Motoren ohne Magnete – Spontanes Drehmoment in Dielektrika.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 57</span>
+                </div>
+
+                <!-- TOC Item 9 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 09</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">DER PIDGEON- & WOMMELSDORF-GENERATOR</h4>
+                        <p class="text-xs text-slate-400">Einflussmaschinen der Extraklasse: Kondensator-Aufladung in Rotation.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 61</span>
+                </div>
+
+                <!-- TOC Item 10 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 10</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">DER BLITZ DES DAMPFES</h4>
+                        <p class="text-xs text-slate-400">Hydrodynamische Ladungstrennung & die Hochspannungsdynamik von Wasserdampf.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 71</span>
+                </div>
+
+                <!-- TOC Item 11 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 11</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">VERANKERUNGSRISS DES GEWITTERS</h4>
+                        <p class="text-xs text-slate-400">Die makroskopische Raum-Tension bei atmosphärischen Entladungen.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 73</span>
+                </div>
+
+                <!-- TOC Item 12 -->
+                <div class="metal-card p-5 hover:border-brass/50 transition flex justify-between items-start group">
+                    <div class="space-y-1 pr-4">
+                        <span class="text-xs font-mono text-brass/70 group-hover:text-brass transition">KAPITEL 12</span>
+                        <h4 class="font-bold text-slate-200 group-hover:text-brass transition">PROTOKOLL DER FELDBEFREIUNG</h4>
+                        <p class="text-xs text-slate-400">Finale Schlussfolgerungen für die Freie-Feld-Konstruktion.</p>
+                    </div>
+                    <span class="font-mono font-bold text-brass bg-metal-900 border border-brass/30 px-3 py-1 rounded text-sm shrink-0">S. 77</span>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="metal-card p-6 sm:p-8 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brass/20 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-brass uppercase tracking-wider">Verlags- & Marketing-Tool</span>
+                    <h3 class="text-xl font-bold text-slate-100">Amazon KDP HTML-Beschreibung Generator</h3>
+                </div>
+                <button id="copyKdpBtn" class="btn-brass px-4 py-2 rounded-lg text-xs font-mono flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 001 2h2a2 2 0 001-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                    <span>HTML In Zwischenablage Kopieren</span>
+                </button>
+              <!--   <a href="https://www.amazon.de/dp/???"  target="_blank" rel="noopener noreferrer" class="btn-brass px-4 py-2 text-xs rounded uppercase tracking-wider cyber-corner">
+                    <i class="fa-solid fa-copy">  </i> erhältlich auf Amazon
+                </a>-->
+				
+            </div>
+
+            <div class="relative">
+                <textarea id="kdpCode" readonly class="w-full h-48 bg-metal-900 border border-brass/30 rounded-lg p-4 font-mono text-xs text-brass-light focus:outline-none leading-relaxed resize-none selection:bg-brass selection:text-metal-900">
+&lt;h2&gt;&lt;b&gt;Das Quantenkomplott IV: Das Drama der Schule&lt;/b&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;b&gt;Warum verharrt die akademische Physik in alten Schemata? Band IV enthüllt die Verankerungen der Raum-Tension und die verblüffende Praxis magnetfreier Flüssigkeitsmotoren.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;In Band IV der Reihe &lt;i&gt;Das Quantenkomplott&lt;/i&gt; widmet sich der Autor der radikalen Neubewertung elektrostatischer Kaskaden und elektrohydrodynamischer Phänomene. Anhand präziser Experimentalkonzepte wie dem &lt;b&gt;Marx-Generator&lt;/b&gt; und dem legendären &lt;b&gt;Quincke-Rotationseffekt&lt;/b&gt; wird demonstriert, wie Raumspannung direkt in kinetische Energie übersetzt werden kann.&lt;/p&gt;
+
+&lt;h3&gt;Highlights des Bandes:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;Raum-Tension:&lt;/b&gt; Die physikalische Wahrheit hinter dem elektrischen Widerstand.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Der Super-Kaskaden-Effekt:&lt;/b&gt; Exponentielle Spannungsvervielfachung ohne schwere Transformatoren.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Der Quincke-Effekt:&lt;/b&gt; Wie flüssige Dielektrika ohne Magnetfeld in Hochgeschwindigkeits-Rotation versetzt werden.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;Pidgeon &amp;amp; Wommelsdorf Generatoren:&lt;/b&gt; Veressene Meisterwerke der historischen Hochspannungstechnik.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ein unverzichtbares Werk für Entwickler, Freigeister und Experimentatoren der neuen Physik!&lt;/p&gt;
+                </textarea>
+            </div>
+            <p id="copyStatus" class="text-xs font-mono text-cyanPulse hidden">✓ HTML-Code erfolgreich in die Zwischenablage kopiert!</p>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-brass/20 bg-metal-900 py-8 mt-12 text-center text-xs font-mono text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="text-brass/80">DAS QUANTENKOMPLOTT IV — DAS DRAMA DER SCHULE</p>
+            <p>© 2026 Band IV Physikalisch-Kybernetisches Archiv. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        const overlay = document.getElementById('canvasOverlay');
+
+        // Buttons
+        const modeMarxBtn = document.getElementById('modeMarxBtn');
+        const modeQuinckeBtn = document.getElementById('modeQuinckeBtn');
+        const triggerActionBtn = document.getElementById('triggerActionBtn');
+        const btnActionText = document.getElementById('btnActionText');
+        const simDescription = document.getElementById('simDescription');
+
+        // Controls
+        const param1 = document.getElementById('param1');
+        const param2 = document.getElementById('param2');
+        const param3 = document.getElementById('param3');
+
+        const labelParam1 = document.getElementById('labelParam1');
+        const labelParam2 = document.getElementById('labelParam2');
+        const labelParam3 = document.getElementById('labelParam3');
+
+        const valParam1 = document.getElementById('valParam1');
+        const valParam2 = document.getElementById('valParam2');
+        const valParam3 = document.getElementById('valParam3');
+
+        let currentMode = 'marx'; // 'marx' or 'quincke'
+        let isDischarging = false;
+        let dischargeProgress = 0;
+        let rotationAngle = 0;
+
+        // Resize Canvas dynamically
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight || 320;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Switch Modes
+        modeMarxBtn.addEventListener('click', () => {
+            currentMode = 'marx';
+            modeMarxBtn.className = "px-3 py-1.5 rounded bg-brass text-metal-900 font-bold transition";
+            modeQuinckeBtn.className = "px-3 py-1.5 rounded bg-metal-700 text-slate-300 hover:text-brass transition";
+            
+            labelParam1.textContent = "Ladespannung (kV)";
+            valParam1.textContent = param1.value + " kV";
+            labelParam2.textContent = "Stufenzahl / Kaskaden";
+            valParam2.textContent = param2.value + " Stufen";
+            labelParam3.textContent = "Funken-Widerstand";
+            valParam3.textContent = param3.value;
+
+            btnActionText.textContent = "Kaskaden-Entladung zünden";
+            simDescription.textContent = "Die Marx-Kaskade lädt Kondensatoren parallel und schaltet sie schlagartig über Funkenstrecken in Serie.";
+            overlay.textContent = "Status: Bereit für Impuls";
+        });
+
+        modeQuinckeBtn.addEventListener('click', () => {
+            currentMode = 'quincke';
+            modeQuinckeBtn.className = "px-3 py-1.5 rounded bg-brass text-metal-900 font-bold transition";
+            modeMarxBtn.className = "px-3 py-1.5 rounded bg-metal-700 text-slate-300 hover:text-brass transition";
+
+            labelParam1.textContent = "Feldstärke (kV/cm)";
+            valParam1.textContent = param1.value + " kV/cm";
+            labelParam2.textContent = "Partikeldichte";
+            valParam2.textContent = param2.value;
+            labelParam3.textContent = "Flüssigkeits-Viskosität";
+            valParam3.textContent = param3.value;
+
+            btnActionText.textContent = "E-Feld Anlegen / Rotieren";
+            simDescription.textContent = "Der Quincke-Effekt zeigt spontane Rotation isolierender Zylinder/Partikel in einem starken homogenen E-Feld ohne Magnetismus.";
+            overlay.textContent = "Status: Motor Aktiv";
+        });
+
+        // Sliders input events
+        param1.addEventListener('input', () => {
+            valParam1.textContent = param1.value + (currentMode === 'marx' ? " kV" : " kV/cm");
+        });
+        param2.addEventListener('input', () => {
+            valParam2.textContent = param2.value + (currentMode === 'marx' ? " Stufen" : "");
+        });
+        param3.addEventListener('input', () => {
+            valParam3.textContent = param3.value;
+        });
+
+        // Trigger Button Action
+        triggerActionBtn.addEventListener('click', () => {
+            if (currentMode === 'marx') {
+                isDischarging = true;
+                dischargeProgress = 0;
+                overlay.textContent = "Status: SUPER-KASKADEN ENTLADUNG!";
+            } else {
+                rotationAngle += 0.5;
+                overlay.textContent = "Status: Feldüberlagerung beschleunigt";
+            }
+        });
+
+        // Render Loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (currentMode === 'marx') {
+                drawMarxGenerator();
+            } else {
+                drawQuinckeEffect();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Draw Marx Generator Simulation
+        function drawMarxGenerator() {
+            const stages = parseInt(param2.value);
+            const voltage = parseInt(param1.value);
+            const padding = 60;
+            const startX = padding;
+            const endX = canvas.width - padding;
+            const stepX = (endX - startX) / (stages - 1 || 1);
+            const centerY = canvas.height / 2;
+
+            // Draw Rails
+            ctx.strokeStyle = '#2d3748';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(startX, centerY - 60);
+            ctx.lineTo(endX, centerY - 60);
+            ctx.moveTo(startX, centerY + 60);
+            ctx.lineTo(endX, centerY + 60);
+            ctx.stroke();
+
+            // Draw Capacitors & Spark Gaps
+            for (let i = 0; i < stages; i++) {
+                const x = startX + i * stepX;
+
+                // Capacitor Body (Brass Style)
+                ctx.fillStyle = '#b8860b';
+                ctx.fillRect(x - 10, centerY - 50, 20, 30);
+                ctx.fillRect(x - 10, centerY + 20, 20, 30);
+
+                // Connections
+                ctx.strokeStyle = '#e6c670';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(x, centerY - 60);
+                ctx.lineTo(x, centerY - 50);
+                ctx.moveTo(x, centerY + 50);
+                ctx.lineTo(x, centerY + 60);
+                ctx.stroke();
+
+                // Spark Gap Spheres
+                ctx.fillStyle = '#e6c670';
+                ctx.beginPath();
+                ctx.arc(x, centerY - 15, 6, 0, Math.PI * 2);
+                ctx.arc(x, centerY + 15, 6, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Spark Arc during discharge
+                if (isDischarging) {
+                    ctx.strokeStyle = '#00f0ff';
+                    ctx.lineWidth = 3 + Math.random() * 2;
+                    ctx.beginPath();
+                    ctx.moveTo(x, centerY - 9);
+                    ctx.lineTo(x + (Math.random() - 0.5) * 6, centerY);
+                    ctx.lineTo(x, centerY + 9);
+                    ctx.stroke();
+
+                    // Main Output Flash at end
+                    if (i === stages - 1) {
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 6;
+                        ctx.beginPath();
+                        ctx.moveTo(x, centerY);
+                        ctx.lineTo(x + 40, centerY);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            if (isDischarging) {
+                dischargeProgress += 0.05;
+                if (dischargeProgress > 1) {
+                    isDischarging = false;
+                    overlay.textContent = "Status: Bereit für Impuls";
+                }
+            }
+        }
+
+        // Draw Quincke Rotation Effect Simulation
+        function drawQuinckeEffect() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const viscosity = parseInt(param3.value);
+            const speed = (11 - viscosity) * 0.02;
+
+            rotationAngle += speed;
+
+            // Plates (High Voltage Electrodes)
+            ctx.fillStyle = '#e6c670';
+            ctx.fillRect(centerX - 120, centerY - 100, 240, 10);
+            ctx.fillRect(centerX - 120, centerY + 90, 240, 10);
+
+            // Electric Field Lines
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.15)';
+            ctx.lineWidth = 1;
+            for (let x = -100; x <= 100; x += 20) {
+                ctx.beginPath();
+                ctx.moveTo(centerX + x, centerY - 90);
+                ctx.lineTo(centerX + x, centerY + 90);
+                ctx.stroke();
+            }
+
+            // Rotating Dielectric Cylinder in Fluid
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(rotationAngle);
+
+            // Cylinder Outer
+            ctx.fillStyle = '#b8860b';
+            ctx.beginPath();
+            ctx.arc(0, 0, 50, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#fff7d6';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Internal markers showing rotation
+            ctx.fillStyle = '#0a0c10';
+            ctx.beginPath();
+            ctx.arc(-20, 0, 8, 0, Math.PI * 2);
+            ctx.arc(20, 0, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+
+            // Text info on Canvas
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = '11px monospace';
+            ctx.fillText("Elektrohydrodynamisches Drehmoment (Null Magnetfeld)", centerX - 150, centerY + 130);
+        }
+
+        // Start Loop on load
+        window.onload = function() {
+            animate();
+        };
+
+        const copyKdpBtn = document.getElementById('copyKdpBtn');
+        const kdpCode = document.getElementById('kdpCode');
+        const copyStatus = document.getElementById('copyStatus');
+
+        copyKdpBtn.addEventListener('click', () => {
+            kdpCode.select();
+            try {
+                document.execCommand('copy');
+                copyStatus.classList.remove('hidden');
+                setTimeout(() => {
+                    copyStatus.classList.add('hidden');
+                }, 3000);
+            } catch (err) {
+                console.error("Kopieren fehlgeschlagen:", err);
+            }
+        });
+    </script>
+</body>
+</html>

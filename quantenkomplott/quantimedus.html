@@ -1,0 +1,683 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS QUANTENKOMPLOTT – Die Buchreihe von F.G. Stier</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        metal: {
+                            950: '#080a0e',
+                            900: '#0e1219',
+                            800: '#181f2c',
+                            700: '#253042',
+                            600: '#38475f',
+                        },
+                        brass: {
+                            light: '#f7ebbe',
+                            DEFAULT: '#e6c670',
+                            dark: '#b8860b',
+                            deep: '#735202',
+                        },
+                        cyanGlow: '#00e5ff',
+                    },
+                    fontFamily: {
+                        mono: ['Courier New', 'Consolas', 'monospace'],
+                        sans: ['Inter', 'Segoe UI', 'sans-serif'],
+                        serif: ['Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #080a0e;
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 50% 15%, rgba(230, 198, 112, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 80% 75%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, #080a0e 0%, #101520 50%, #080a0e 100%);
+            background-attachment: fixed;
+        }
+
+        /* Brushed Metal Texture Pattern */
+        .brushed-metal {
+            background: linear-gradient(135deg, #18202c 0%, #101520 40%, #0c1018 70%, #141c28 100%);
+            border: 1px solid rgba(230, 198, 112, 0.25);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.9),
+                0 12px 30px -5px rgba(0, 0, 0, 0.8);
+        }
+
+        /* 3D Polished Brass Text Effect */
+        .brass-3d-text {
+            color: #e6c670;
+            background: linear-gradient(135deg, #ffffff 0%, #f7ebbe 25%, #e6c670 50%, #b8860b 80%, #5c4002 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.9));
+        }
+
+        .brass-border {
+            border-image: linear-gradient(135deg, #f7ebbe, #b8860b, #5c4002) 1;
+        }
+
+        /* Interactive Card Hover Effects */
+        .volume-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .volume-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(230, 198, 112, 0.6);
+            box-shadow: 
+                0 15px 35px -5px rgba(0, 0, 0, 0.9),
+                0 0 25px rgba(230, 198, 112, 0.25);
+        }
+
+        /* Custom Button Styling */
+        .btn-brass {
+            background: linear-gradient(180deg, #f7ebbe 0%, #d4af37 50%, #9e7309 100%);
+            color: #080a0e;
+            font-weight: 800;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 1px solid #b8860b;
+            box-shadow: 
+                0 4px 10px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        .btn-brass:hover {
+            background: linear-gradient(180deg, #ffffff 0%, #e6c670 50%, #b8860b 100%);
+            box-shadow: 
+                0 6px 15px rgba(230, 198, 112, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
+        }
+
+        .btn-brass:active {
+            transform: translateY(1px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080a0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #253042;
+            border-radius: 4px;
+            border: 1px solid rgba(230, 198, 112, 0.3);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e6c670;
+        }
+    </style>
+    <link rel="preload" as="image" href="/wappen.jpg">
+</head>
+<body class="min-h-screen font-sans antialiased text-slate-200 selection:bg-brass-dark selection:text-white">
+
+    <!-- Top Navigation -->
+    <header class="sticky top-0 z-50 bg-metal-950/90 backdrop-blur-md border-b border-brass/20 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brass to-brass-dark flex items-center justify-center shadow-lg border border-brass-light/40">
+                    <span class="font-mono text-xl font-black text-metal-950">DQ</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-brass/80 font-mono">F.G. STIER — MONOGRAPHIEN</span>
+                    <span class="font-bold text-base sm:text-lg tracking-tight text-white">DAS QUANTENKOMPLOTT</span>
+					<a href="https://quantimedus.de" class="px-3 py-1.5 rounded bg-brass/10 text-brass font-bold border border-brass/30 hover:bg-brass/20 transition">Hauptseite Quantimedus</a>
+                </div>
+            </div>
+
+            <!-- Series Links -->
+            <nav class="hidden md:flex space-x-2 p-1.5 bg-metal-900 rounded-xl border border-brass/20 text-xs font-mono">
+                <button onclick="scrollToVolume('v1')" class="px-3 py-1.5 rounded hover:text-brass transition text-slate-300">Band I</button>
+                <button onclick="scrollToVolume('v2')" class="px-3 py-1.5 rounded hover:text-brass transition text-slate-300">Band II</button>
+                <button onclick="scrollToVolume('v3')" class="px-3 py-1.5 rounded hover:text-brass transition text-slate-300">Band III</button>
+                <button onclick="scrollToVolume('v4')" class="px-3 py-1.5 rounded hover:text-brass transition text-slate-300">Band IV</button>
+                <a href="#lab" class="px-3 py-1.5 rounded bg-brass/10 text-brass font-bold border border-brass/30 hover:bg-brass/20 transition">Feld-Laboratorium</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <section class="relative text-center py-16 px-6 rounded-2xl brushed-metal overflow-hidden border border-brass/30">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e6c670_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl mx-auto space-y-6">
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brass/10 border border-brass/30 text-brass text-xs font-mono tracking-widest uppercase">
+                    <span class="w-2 h-2 rounded-full bg-cyanGlow animate-pulse"></span>
+                    <span>4-BÄNDIGE GESAMTAUSGABE</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight uppercase brass-3d-text py-1">
+                    DAS QUANTENKOMPLOTT
+                </h1>
+
+                <h2 class="text-lg sm:text-2xl font-light text-slate-300 tracking-wide font-serif italic">
+                    — Feldmechanische Rekonstruktionen der Elektrostatik von F.G. Stier —
+                </h2>
+
+                <p class="text-slate-400 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed font-sans">
+                    Eine kompromisslose Revision der physikalischen Dogmen: Vom Reibungselektrisieren über Maxwells Spannungen und den Poynting-Vektor bis hin zu Hochspannungs-Kaskaden und magnetfreien Flüssigkeitsmotoren.
+                </p>
+
+                <div class="pt-4 flex flex-wrap justify-center gap-4 text-xs font-mono text-slate-300">
+                    <span class="px-4 py-2 rounded-lg bg-metal-900 border border-brass/30 flex items-center gap-2">
+                        <span class="text-brass">📚</span> 4 Bände Vollsynthese
+                    </span>
+                    <span class="px-4 py-2 rounded-lg bg-metal-900 border border-brass/30 flex items-center gap-2">
+                        <span class="text-brass">⚡</span> 46 Kapitel Feldmechanik
+                    </span>
+                    <span class="px-4 py-2 rounded-lg bg-metal-900 border border-brass/30 flex items-center gap-2">
+                        <span class="text-brass">🧪</span> Interaktive Simulationen
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="lab" class="brushed-metal p-6 sm:p-8 rounded-2xl space-y-6">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-brass/20 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-brass uppercase tracking-wider">Interaktives Simulations-Zentrum</span>
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <span>Zentrales Feldmechanik-Laboratorium</span>
+                    </h3>
+                </div>
+                
+                <!-- Engine Selector Buttons -->
+                <div class="flex flex-wrap gap-2 text-xs font-mono">
+                    <button id="btnModFriction" onclick="switchEngine('friction')" class="px-3 py-1.5 rounded bg-brass text-metal-950 font-bold transition">1. Reibung (Band I)</button>
+                    <button id="btnModWimshurst" onclick="switchEngine('wimshurst')" class="px-3 py-1.5 rounded bg-metal-800 text-slate-300 hover:text-brass transition">2. Wimshurst (Band II)</button>
+                    <button id="btnModPoynting" onclick="switchEngine('poynting')" class="px-3 py-1.5 rounded bg-metal-800 text-slate-300 hover:text-brass transition">3. Poynting (Band III)</button>
+                    <button id="btnModMarx" onclick="switchEngine('marx')" class="px-3 py-1.5 rounded bg-metal-800 text-slate-300 hover:text-brass transition">4. Marx-Kaskade (Band IV)</button>
+                    <button id="btnModQuincke" onclick="switchEngine('quincke')" class="px-3 py-1.5 rounded bg-metal-800 text-slate-300 hover:text-brass transition">5. Quincke (Band IV)</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Canvas Render Display -->
+                <div class="lg:col-span-2 bg-metal-950 border border-brass/30 rounded-xl p-3 relative flex flex-col justify-center items-center min-h-[380px] shadow-inner overflow-hidden">
+                    <canvas id="masterCanvas" class="w-full h-80 rounded bg-metal-950 cursor-pointer"></canvas>
+                    <div id="simStatusOverlay" class="absolute top-5 left-5 bg-metal-900/90 backdrop-blur px-3 py-1.5 rounded border border-brass/30 text-xs font-mono text-brass shadow-lg">
+                        Modus: Reibungselektrizität & Ladungstrennung
+                    </div>
+                </div>
+
+                <!-- Control Console -->
+                <div class="bg-metal-900/80 p-5 rounded-xl border border-brass/20 flex flex-col justify-between space-y-4">
+                    <div class="space-y-4">
+                        <h4 id="consoleTitle" class="text-sm font-bold text-brass uppercase tracking-wider font-mono border-b border-brass/20 pb-2">
+                            Parameter: Reibungskraft
+                        </h4>
+
+                        <!-- Slider 1 -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-mono">
+                                <label id="lblParam1" for="ctrlParam1" class="text-slate-300">Anpressdruck / Feldstärke</label>
+                                <span id="valParam1" class="text-brass font-bold">50%</span>
+                            </div>
+                            <input type="range" id="ctrlParam1" min="10" max="100" value="50" class="w-full accent-brass bg-metal-950 h-2 rounded cursor-pointer">
+                        </div>
+
+                        <!-- Slider 2 -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-mono">
+                                <label id="lblParam2" for="ctrlParam2" class="text-slate-300">Rotations-Geschwindigkeit</label>
+                                <span id="valParam2" class="text-brass font-bold">60 U/min</span>
+                            </div>
+                            <input type="range" id="ctrlParam2" min="10" max="120" value="60" class="w-full accent-brass bg-metal-950 h-2 rounded cursor-pointer">
+                        </div>
+
+                        <!-- Slider 3 -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-mono">
+                                <label id="lblParam3" for="ctrlParam3" class="text-slate-300">Dielektrizitätskonstante ε</label>
+                                <span id="valParam3" class="text-brass font-bold">4.5</span>
+                            </div>
+                            <input type="range" id="ctrlParam3" min="1" max="10" value="5" class="w-full accent-brass bg-metal-950 h-2 rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <button id="btnTriggerAction" class="w-full py-3 rounded-lg btn-brass uppercase font-mono tracking-wider text-xs sm:text-sm flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.57l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.57l7-10a1 1 0 011.12-.384z" clip-rule="evenodd"></path></svg>
+                            <span id="txtActionLabel">Impuls Auslösen / Feld Reizen</span>
+                        </button>
+                        <p id="engineInfoText" class="text-[11px] text-slate-400 font-mono text-center leading-relaxed">
+                            Simuliert die mechanische Ladungstrennung zwischen Lederlappen und Glaszylinder nach historischen Experimenten.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="volumes" class="space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-xs font-mono text-brass uppercase tracking-widest">GESAMTE BUCHREIHE IN UNTERSUCHUNG</span>
+                <h3 class="text-3xl font-black text-white uppercase tracking-tight">Die 4 Bände im Detail</h3>
+                <div class="w-32 h-1 bg-gradient-to-r from-transparent via-brass to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- BAND I -->
+                <div id="v1" class="brushed-metal rounded-2xl p-6 sm:p-8 space-y-6 volume-card flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-brass/20 pb-3">
+                            <div>
+                                <span class="text-xs font-mono text-brass font-bold uppercase">BAND I</span>
+                                <h4 class="text-xl font-bold text-white mt-0.5">Das Glasstab-Lederlappen-Drama</h4>
+                            </div>
+                            <span class="font-mono text-xs px-2.5 py-1 bg-metal-950 border border-brass/30 text-brass rounded">S. 1–52</span>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                            Analyse der elementaren Reibungselektrizität. Das Buch dekonstruiert das tradierte Bild freier Elektronen und beweist die dielektrische Polarisierung der Umgebung.
+                        </p>
+
+                        <div class="space-y-2">
+                            <span class="text-[11px] font-mono text-brass uppercase tracking-wider block">Ausgewählte Kapitel:</span>
+                            <ul class="text-xs text-slate-400 space-y-1 font-mono list-disc list-inside">
+                                <li>Das Glasstab-Lederlappen-Drama</li>
+                                <li>Die Illusion der Ladungstrennung</li>
+                                <li>Das Dielektrikum als wahrer Energieträger</li>
+                                <li>Maxwellsche Spannungen im Äther</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-brass/20 flex justify-between items-center">
+                        <span class="text-[11px] font-mono text-slate-400">Schwerpunkt: Grundlagen & Reibung</span>
+                        <a href="quantenkomplott_band1.html" target="_blank" class="px-3 py-1.5 rounded bg-metal-950 border border-brass/40 text-brass text-xs font-mono hover:bg-brass hover:text-metal-950 transition font-bold">
+                            Band I Öffnen →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- BAND II -->
+                <div id="v2" class="brushed-metal rounded-2xl p-6 sm:p-8 space-y-6 volume-card flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-brass/20 pb-3">
+                            <div>
+                                <span class="text-xs font-mono text-brass font-bold uppercase">BAND II</span>
+                                <h4 class="text-xl font-bold text-white mt-0.5">Das Drama der Artefakte</h4>
+                            </div>
+                            <span class="font-mono text-xs px-2.5 py-1 bg-metal-950 border border-brass/30 text-brass rounded">S. 1–68</span>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                            Untersuchung historischer Einflussmaschinen (Wimshurst, Holtz, Toepler). Enthüllung wie mechanische Rotationsenergie direkt in elektrostatische Spannung transformiert wird.
+                        </p>
+
+                        <div class="space-y-2">
+                            <span class="text-[11px] font-mono text-brass uppercase tracking-wider block">Ausgewählte Kapitel:</span>
+                            <ul class="text-xs text-slate-400 space-y-1 font-mono list-disc list-inside">
+                                <li>Das Drama der Artefakte</li>
+                                <li>Einflussmaschinen und Sektor-Kopplung</li>
+                                <li>Der Mythos der Influenz</li>
+                                <li>Spannungsverdopplung in Rotation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-brass/20 flex justify-between items-center">
+                        <span class="text-[11px] font-mono text-slate-400">Schwerpunkt: Einflussmaschinen</span>
+                        <a href="quantenkomplott_band2.html" target="_blank" class="px-3 py-1.5 rounded bg-metal-950 border border-brass/40 text-brass text-xs font-mono hover:bg-brass hover:text-metal-950 transition font-bold">
+                            Band II Öffnen →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- BAND III -->
+                <div id="v3" class="brushed-metal rounded-2xl p-6 sm:p-8 space-y-6 volume-card flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-brass/20 pb-3">
+                            <div>
+                                <span class="text-xs font-mono text-brass font-bold uppercase">BAND III</span>
+                                <h4 class="text-xl font-bold text-white mt-0.5">Quantimedus & Poynting-Vektor</h4>
+                            </div>
+                            <span class="font-mono text-xs px-2.5 py-1 bg-metal-950 border border-brass/30 text-brass rounded">S. 1–84</span>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                            Die Rekonstruktion des Energieflusses: Der Poynting-Vektor beweist, dass Energie nicht im Draht, sondern im umgebenden Raum transferiert wird.
+                        </p>
+
+                        <div class="space-y-2">
+                            <span class="text-[11px] font-mono text-brass uppercase tracking-wider block">Ausgewählte Kapitel:</span>
+                            <ul class="text-xs text-slate-400 space-y-1 font-mono list-disc list-inside">
+                                <li>Quantimedus – Die Quantelung des Feldes</li>
+                                <li>Der Poynting-Vektor im Nahfeld</li>
+                                <li>Energietransport außerhalb des Leiters</li>
+                                <li>Felddichte und Raumkrümmung</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-brass/20 flex justify-between items-center">
+                        <span class="text-[11px] font-mono text-slate-400">Schwerpunkt: Poynting-Vektor & Raum</span>
+                        <a href="quantenkomplott_band3.html" target="_blank" class="px-3 py-1.5 rounded bg-metal-950 border border-brass/40 text-brass text-xs font-mono hover:bg-brass hover:text-metal-950 transition font-bold">
+                            Band III Öffnen →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- BAND IV -->
+                <div id="v4" class="brushed-metal rounded-2xl p-6 sm:p-8 space-y-6 volume-card flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start border-b border-brass/20 pb-3">
+                            <div>
+                                <span class="text-xs font-mono text-brass font-bold uppercase">BAND IV</span>
+                                <h4 class="text-xl font-bold text-white mt-0.5">Das Drama der Schule</h4>
+                            </div>
+                            <span class="font-mono text-xs px-2.5 py-1 bg-metal-950 border border-brass/30 text-brass rounded">S. 1–77</span>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                            Kritische Dekonstruktion schulischer Physikdogmen, Raum-Tension, Super-Kaskaden im Marx-Generator und magnetfreie Quincke-Rotationsmotoren.
+                        </p>
+
+                        <div class="space-y-2">
+                            <span class="text-[11px] font-mono text-brass uppercase tracking-wider block">Ausgewählte Kapitel:</span>
+                            <ul class="text-xs text-slate-400 space-y-1 font-mono list-disc list-inside">
+                                <li>Das Drama der Schule</li>
+                                <li>Der Glaswürfel – Gepresste Volumen</li>
+                                <li>Super-Kaskaden-Effekt im Marx-Generator</li>
+                                <li>Quincke-Rotation (Flüssige Motoren)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-brass/20 flex justify-between items-center">
+                        <span class="text-[11px] font-mono text-slate-400">Schwerpunkt: Marx & Quincke-Rotation</span>
+                        <a href="quantenkomplott_band4.html" target="_blank" class="px-3 py-1.5 rounded bg-metal-950 border border-brass/40 text-brass text-xs font-mono hover:bg-brass hover:text-metal-950 transition font-bold">
+                            Band IV Öffnen →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="brushed-metal p-6 sm:p-8 rounded-2xl space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brass/20 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-brass uppercase tracking-wider">Verlags-Zentrale</span>
+                    <h3 class="text-xl font-bold text-white">Amazon HTML-Beschreibung Generator</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select id="selectKdpBand" onchange="updateKdpText()" class="bg-metal-950 text-brass border border-brass/30 rounded px-3 py-1.5 text-xs font-mono focus:outline-none">
+                        <option value="1">Band I - Glasstab-Lederlappen</option>
+                        <option value="2">Band II - Drama der Artefakte</option>
+                        <option value="3">Band III - Poynting-Vektor</option>
+                        <option value="4" selected>Band IV - Drama der Schule</option>
+                    </select>
+                    <button onclick="copyKdpCode()" class="btn-brass px-3 py-1.5 rounded text-xs font-mono flex items-center gap-1">
+                        📋 <span>Kopieren</span>
+                    </button>
+                </div>
+            </div>
+
+            <textarea id="kdpMasterBox" readonly class="w-full h-40 bg-metal-950 border border-brass/30 rounded-lg p-4 font-mono text-xs text-brass-light focus:outline-none leading-relaxed resize-none"></textarea>
+            <p id="kdpCopyAlert" class="text-xs font-mono text-cyanGlow hidden">✓ Code erfolgreich in die Zwischenablage kopiert!</p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-brass/20 bg-metal-950 py-8 mt-12 text-center text-xs font-mono text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="text-brass/80">DAS QUANTENKOMPLOTT — FELDMECHANISCHE GESAMTAUSGABE I–IV</p>
+            <p>© 2026 F.G. Stier Monographien-Archiv. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling helper
+        function scrollToVolume(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // KDP Description Templates
+        const kdpTemplates = {
+            1: `<h2><b>Das Quantenkomplott I: Das Glasstab-Lederlappen-Drama</b></h2>
+<p><b>Die Geburtsstunde der Elektrostatik neu aufgerollt!</b></p>
+<p>In Band I zerlegt F.G. Stier das klassische Schulmodell des Reibungselektrisierens und beweist die fundamentale Rolle der Raumdielektrik.</p>`,
+            2: `<h2><b>Das Quantenkomplott II: Das Drama der Artefakte</b></h2>
+<p><b>Einflussmaschinen und die Mechanik der Spannungsverdopplung.</b></p>
+<p>Untersuchung von Wimshurst-, Holtz- und Toepler-Generatoren. Wie Rotation direkt in elektrostatischen Druck konvertiert wird.</p>`,
+            3: `<h2><b>Das Quantenkomplott III: Quantimedus & Poynting-Vektor</b></h2>
+<p><b>Wo fließt die Energie wirklich?</b></p>
+<p>Der Poynting-Vektor beweist bildhaft: Energie wandert nicht durch Kupferatome, sondern durch das unberührte Feld des Raumes.</p>`,
+            4: `<h2><b>Das Quantenkomplott IV: Das Drama der Schule</b></h2>
+<p><b>Raum-Tension, Marx-Kaskaden & Quincke-Rotation.</b></p>
+<p>Eine kompromisslose Demontage alter Lehrmodelle. Enthält die Bauprinzipien magnetfreier Flüssigkeitsmotoren und Impuls-Kaskaden.</p>`
+        };
+
+        function updateKdpText() {
+            const val = document.getElementById('selectKdpBand').value;
+            document.getElementById('kdpMasterBox').value = kdpTemplates[val];
+        }
+        updateKdpText();
+
+        function copyKdpCode() {
+            const box = document.getElementById('kdpMasterBox');
+            box.select();
+            document.execCommand('copy');
+            const alert = document.getElementById('kdpCopyAlert');
+            alert.classList.remove('hidden');
+            setTimeout(() => alert.classList.add('hidden'), 2500);
+        }
+
+        // ==========================================
+        // CANVAS MULTI-ENGINE SIMULATOR
+        // ==========================================
+        const canvas = document.getElementById('masterCanvas');
+        const ctx = canvas.getContext('2d');
+        const overlay = document.getElementById('simStatusOverlay');
+
+        // Engine State Variables
+        let currentEngine = 'friction';
+        let animFrameId;
+        let simAngle = 0;
+        let pulseTimer = 0;
+
+        // Sliders
+        const ctrl1 = document.getElementById('ctrlParam1');
+        const ctrl2 = document.getElementById('ctrlParam2');
+        const ctrl3 = document.getElementById('ctrlParam3');
+
+        const val1 = document.getElementById('valParam1');
+        const val2 = document.getElementById('valParam2');
+        const val3 = document.getElementById('valParam3');
+
+        const consoleTitle = document.getElementById('consoleTitle');
+        const engineInfoText = document.getElementById('engineInfoText');
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight || 320;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Control input listeners
+        ctrl1.addEventListener('input', () => val1.textContent = ctrl1.value + (currentEngine === 'marx' ? ' kV' : '%'));
+        ctrl2.addEventListener('input', () => val2.textContent = ctrl2.value + ' U/min');
+        ctrl3.addEventListener('input', () => val3.textContent = (ctrl3.value / 10).toFixed(1));
+
+        function switchEngine(mode) {
+            currentEngine = mode;
+            
+            // Reset Button Styles
+            ['Friction', 'Wimshurst', 'Poynting', 'Marx', 'Quincke'].forEach(m => {
+                const b = document.getElementById('btnMod' + m);
+                if (b) b.className = "px-3 py-1.5 rounded bg-metal-800 text-slate-300 hover:text-brass transition";
+            });
+
+            const activeBtn = document.getElementById('btnMod' + mode.charAt(0).toUpperCase() + mode.slice(1));
+            if (activeBtn) activeBtn.className = "px-3 py-1.5 rounded bg-brass text-metal-950 font-bold transition";
+
+            if (mode === 'friction') {
+                consoleTitle.textContent = "Parameter: Reibungskraft & Druck";
+                engineInfoText.textContent = "Band I: Reibungselektrisieren von Glas und Leder als Feldpolarisation.";
+                overlay.textContent = "Modus: Reibungselektrizität (Band I)";
+            } else if (mode === 'wimshurst') {
+                consoleTitle.textContent = "Parameter: Sektor-Anzahl & Drehzahl";
+                engineInfoText.textContent = "Band II: Gegensinnig rotierende Scheiben erzeugen exponentielle Influenzspannung.";
+                overlay.textContent = "Modus: Wimshurst-Einflussmaschine (Band II)";
+            } else if (mode === 'poynting') {
+                consoleTitle.textContent = "Parameter: Feld-Amplitude & Flussdichte";
+                engineInfoText.textContent = "Band III: S = E x H Energieflussströme außerhalb des Leiters im Raum.";
+                overlay.textContent = "Modus: Poynting-Vektor-Feldfluss (Band III)";
+            } else if (mode === 'marx') {
+                consoleTitle.textContent = "Parameter: Stufenzahl & Stoßspannung";
+                engineInfoText.textContent = "Band IV: Super-Kaskaden-Entladung durch Blitz-Überschlag in Serie.";
+                overlay.textContent = "Modus: Marx-Generator Kaskade (Band IV)";
+            } else if (mode === 'quincke') {
+                consoleTitle.textContent = "Parameter: Viskosität & HV-Feldstärke";
+                engineInfoText.textContent = "Band IV: Magnetfreie elektrohydrodynamische Rotation im Ölbad.";
+                overlay.textContent = "Modus: Quincke-Rotationsmotor (Band IV)";
+            }
+        }
+
+        document.getElementById('btnTriggerAction').addEventListener('click', () => {
+            pulseTimer = 1.0;
+        });
+
+        // Animation Loop
+        function drawLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            simAngle += parseInt(ctrl2.value) * 0.0005;
+
+            if (currentEngine === 'friction') {
+                // Draw Friction Cylinder & Leather Pad
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(simAngle);
+                ctx.fillStyle = '#b8860b';
+                ctx.beginPath();
+                ctx.arc(0, 0, 60, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#f7ebbe';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                ctx.restore();
+
+                // Leather Pad
+                ctx.fillStyle = '#735202';
+                ctx.fillRect(cx + 50, cy - 40, 25, 80);
+
+                // Sparkles / Field lines
+                if (pulseTimer > 0) {
+                    ctx.strokeStyle = '#00e5ff';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, 75 + Math.random() * 10, 0, Math.PI * 2);
+                    ctx.stroke();
+                    pulseTimer -= 0.05;
+                }
+
+            } else if (currentEngine === 'wimshurst') {
+                // Dual Counter-Rotating Disks
+                for (let dir of [-1, 1]) {
+                    ctx.save();
+                    ctx.translate(cx, cy);
+                    ctx.rotate(simAngle * dir);
+                    ctx.strokeStyle = dir === 1 ? 'rgba(230, 198, 112, 0.6)' : 'rgba(0, 229, 255, 0.4)';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 70 + dir * 15, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Sectors
+                    for (let i = 0; i < 8; i++) {
+                        const a = (i * Math.PI) / 4;
+                        ctx.fillStyle = '#e6c670';
+                        ctx.fillRect(Math.cos(a) * (65 + dir * 15), Math.sin(a) * (65 + dir * 15), 8, 8);
+                    }
+                    ctx.restore();
+                }
+
+            } else if (currentEngine === 'poynting') {
+                // Wire + Surrounding Space Energy Field Vectors
+                ctx.fillStyle = '#b8860b';
+                ctx.fillRect(cx - 150, cy - 8, 300, 16); // Conductor
+
+                ctx.strokeStyle = 'rgba(0, 229, 255, 0.5)';
+                ctx.lineWidth = 1.5;
+                for (let x = -130; x <= 130; x += 30) {
+                    const offset = (simAngle * 50 + x) % 150;
+                    ctx.beginPath();
+                    ctx.moveTo(cx + x, cy - 60);
+                    ctx.lineTo(cx + x, cy - 15);
+                    ctx.lineTo(cx + x + 10, cy - 25);
+                    ctx.stroke();
+                }
+
+            } else if (currentEngine === 'marx') {
+                // Marx Generator Spark Gaps
+                for (let i = -3; i <= 3; i++) {
+                    const x = cx + i * 40;
+                    ctx.fillStyle = '#e6c670';
+                    ctx.fillRect(x - 5, cy - 40, 10, 20);
+                    ctx.fillRect(x - 5, cy + 20, 10, 20);
+
+                    if (pulseTimer > 0) {
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.moveTo(x, cy - 20);
+                        ctx.lineTo(x + (Math.random() - 0.5) * 6, cy);
+                        ctx.lineTo(x, cy + 20);
+                        ctx.stroke();
+                    }
+                }
+                if (pulseTimer > 0) pulseTimer -= 0.04;
+
+            } else if (currentEngine === 'quincke') {
+                // Quincke Rotor
+                ctx.fillStyle = '#e6c670';
+                ctx.fillRect(cx - 100, cy - 80, 200, 8);
+                ctx.fillRect(cx - 100, cy + 75, 200, 8);
+
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(simAngle * 2);
+                ctx.fillStyle = '#b8860b';
+                ctx.beginPath();
+                ctx.arc(0, 0, 45, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#00e5ff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            requestAnimationFrame(drawLoop);
+        }
+
+        window.onload = function() {
+            drawLoop();
+        };
+    </script>
+</body>
+</html>

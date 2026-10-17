@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F.G. Stier – Inhaltsverzeichnis & Gesamtmatrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0c0e12;
+            background-image: url('ressourcen/Philosophie Stier.jpg');
+            background-repeat: repeat;
+            background-size: 500px;
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cyber-panel {
+            background: rgba(12, 14, 18, 0.94);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(212, 175, 55, 0.08);
+        }
+
+        .book-card {
+            background: rgba(18, 22, 30, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            animation: cardPulse 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes cardPulse {
+            0% { border-color: rgba(212, 175, 55, 0.2); box-shadow: 0 0 5px rgba(212, 175, 55, 0.05); }
+            100% { border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        }
+
+        .book-card:hover {
+            transform: translateY(-3px);
+            background: rgba(25, 30, 40, 0.95);
+        }
+
+        @keyframes goldShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .animated-btn {
+            background: linear-gradient(120deg, #1e2530 0%, #333d4f 40%, #d4af37 50%, #333d4f 60%, #1e2530 100%);
+            background-size: 200% auto;
+            color: #ffffff;
+            animation: goldShimmer 5s linear infinite;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+<header class="max-w-4xl mx-auto text-center my-6 z-10 cyber-panel rounded-2xl p-6 sm:p-8 shadow-2xl">
+    <span class="text-xs font-mono text-amber-400 tracking-widest uppercase bg-black/80 px-4 py-1.5 border border-amber-500/40 rounded-full shadow-lg">
+        // ARCHIV-INDEX: DIE GESAMTMATRIX
+    </span>
+    
+    <h1 class="text-2xl sm:text-4xl font-black tracking-wider text-amber-300 mt-4 mb-2 font-['Chakra_Petch']">
+        F.G. STIER — INHALTSVERZEICHNIS
+    </h1>
+    
+    <p class="text-xs sm:text-sm text-slate-300 font-light">
+        Wählen Sie einen Band aus, um direkt in die jeweilige Code-Matrix zu springen.
+    </p>
+</header>
+
+
+    <main class="max-w-5xl w-full mx-auto cyber-panel rounded-2xl p-4 sm:p-8 z-10 my-auto shadow-2xl">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+
+                    <a href="typografie1-01-loop-bug-dusseline.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 01</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">loop bug dusseline</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-02-sammlung-leerer-intelligenz.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 02</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">sammlung leerer intelligenz</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-03-totalschaden-oder-mathematik.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 03</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">totalschaden oder mathematik</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-04-chronik-der-permanenten-ursache-sektor-dresden.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 04</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">chronik der permanenten ursache sektor dresden</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-05-das-darknet-der-ratten-geheime-physik-der-geigenmusik.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 05</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">das darknet der ratten geheime physik der geigenmusik</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-06-das-prinzip-der-zeitlosen-verursachung-i.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 06</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">das prinzip der zeitlosen verursachung i</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-07-das-prinzip-der-zeitlosen-verursachung-ii.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 07</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">das prinzip der zeitlosen verursachung ii</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-08-die-freiheit-der-absurditaet.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 08</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">die freiheit der absurditaet</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-09-segel-im-nichts-eine-kurs-analyse.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 09</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">segel im nichts eine kurs analyse</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-10-influenz---das-quantenkomplott-i.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 10</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">influenz   das quantenkomplott i</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-11-influenz---das-quantenkomplott-ii.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 11</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">influenz   das quantenkomplott ii</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-12-influenz---das-quantenkomplott-iii.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 12</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">influenz   das quantenkomplott iii</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-13-influenz---das-quantenkomplott-iv.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 13</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">influenz   das quantenkomplott iv</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-14-stier.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 14</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">stier</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-15-arkusnat.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 15</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">arkusnat</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-16-quanatimedus.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 16</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">quanatimedus</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+    <a href="typografie1-17-rücklauf-auf-unendlich.html" class="book-card rounded-xl p-3 sm:p-4 flex flex-col justify-between text-left group">
+        <span class="text-[10px] font-mono text-amber-400">// BAND 17</span>
+        <div class="my-3">
+            <h2 class="text-xs sm:text-sm font-bold font-['Chakra_Petch'] text-white group-hover:text-amber-300">rücklauf auf unendlich</h2>
+        </div>
+        <span class="text-[9px] font-mono text-slate-400 flex items-center justify-between">Öffnen <i class="fa-solid fa-arrow-right text-amber-400"></i></span>
+    </a>
+</div>
+
+
+        <div class="mt-8 pt-4 border-t border-slate-800 text-center">
+            <a href="index.html" class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 hover:text-amber-300 transition tracking-wider uppercase">
+                <i class="fa-solid fa-arrow-left"></i> Zurück zur Hauptzentrale
+            </a>
+        </div>
+    </main>
+
+    <footer class="max-w-5xl w-full mx-auto mt-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <a href="https://arkusnat.de" target="_blank" class="animated-btn px-4 py-3 rounded-xl text-xs uppercase tracking-wider text-center shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-house"></i>
+                <span>ARKUSNAT</span>
+            </a>
+            <a href="https://fgstier-art.de" target="_blank" class="animated-btn px-4 py-3 rounded-xl text-xs uppercase tracking-wider text-center shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-palette"></i>
+                <span>FGSTIER-ART</span>
+            </a>
+            <a href="https://quantimedus.de" target="_blank" class="animated-btn px-4 py-3 rounded-xl text-xs uppercase tracking-wider text-center shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-atom"></i>
+                <span>QUANTIMEDUS</span>
+            </a>
+        </div>
+        <div class="text-center text-[10px] text-slate-500 font-mono mt-4">
+            F.G. STIER &copy; 2026 // ALL VOLUMES INDEXED
+        </div>
+    </footer>
+
+</body>
+</html>

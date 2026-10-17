@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F.G. Stier | Quantimedus & System-Matrix | ARKUSNAT</title>
+    
+    <!-- Tailwind CSS & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyberbg: '#030305',
+                        cyberpanel: '#0c0c12',
+                        neoncyan: '#00ffcc',
+                        neonblue: '#0066ff',
+                        neonpink: '#ff0055',
+                        mutedgray: '#52526b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        cyberglow: '0 0 15px rgba(0, 255, 204, 0.2)',
+                        cyberpink: '0 0 15px rgba(255, 0, 85, 0.2)',
+                        quantimglow: '0 0 25px rgba(255, 0, 85, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+<style>
+        /* Cyber-Scanlines Effekt im Hintergrund */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+            opacity: 0.12;
+        }
+
+        /* Automatischer, permanenter Glow für UI-Rahmen */
+        .glow-border-quantimedus {
+            box-shadow: inset 0 0 15px rgba(255, 0, 85, 0.15), 0 0 20px rgba(255, 0, 85, 0.2);
+            border-color: rgba(255, 0, 85, 0.4);
+        }
+
+        /* 1. Pulsieren & Skalieren */
+        @keyframes auto-quantum-pulse {
+          0% {
+            box-shadow: 0 0 10px #00ffcc, inset 0 0 5px #00ffcc;
+            border-color: #00ffcc;
+            transform: scale(1);
+          }
+          50% {
+            box-shadow: 0 0 25px #ff0055, inset 0 0 12px #ff0055;
+            border-color: #ff0055;
+            transform: scale(1.02);
+          }
+          100% {
+            box-shadow: 0 0 10px #00ffcc, inset 0 0 5px #00ffcc;
+            border-color: #00ffcc;
+            transform: scale(1);
+          }
+        }
+
+        /* 2. Dynamischer Farbverlauf (Schwimmen) */
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Beides kombiniert für den Button */
+        .auto-quantum-btn {
+            background-size: 200% 200%;
+            animation: auto-quantum-pulse 3s infinite ease-in-out, 
+                       gradient-animation 5s ease infinite;
+        }
+
+        /* Dynamischer Canvas-Hintergrund für Radar & Funken */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+		@keyframes letter-drift {
+    0%, 100% { letter-spacing: 0.05em; }
+    50% { letter-spacing: 0.15em; }
+}
+
+.auto-quantum-btn span {
+    display: inline-block;
+    animation: letter-drift 4s ease-in-out infinite;
+}
+
+@keyframes cyber-text-glitch {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-0.5px, 0.5px); }
+    40% { transform: translate(0.5px, -0.5px); }
+    60% { transform: translate(-0.3px, -0.3px); }
+    80% { transform: translate(0.3px, 0.3px); }
+}
+
+.auto-quantum-btn span {
+    display: inline-block;
+    animation: cyber-text-glitch 1.5s infinite;
+}
+
+    @keyframes quantum-overdrive {
+                  0% {
+                    box-shadow: 0 0 8px #00ffcc, inset 0 0 8px #00ffcc;
+                    text-shadow: -1px 0 #ff0055, 1px 0 #0066ff;
+                    transform: scale(1) rotate(0deg);
+                  }
+                  25% {
+                    box-shadow: 0 0 20px #ff0055, inset 0 0 15px #ff0055;
+                    text-shadow: 2px 0 #00ffcc, -2px 0 #ff0055;
+                    transform: scale(1.06) rotate(-1deg);
+                    border-color: #ff0055;
+                  }
+                  50% {
+                    box-shadow: 0 0 35px #00ffcc, 0 0 50px #00ffcc, inset 0 0 20px #00ffcc;
+                    text-shadow: -2px 0 #0066ff, 2px 0 #00ffcc;
+                    transform: scale(1.08) rotate(1deg);
+                    border-color: #00ffcc;
+                  }
+                  75% {
+                    box-shadow: 0 0 25px #0066ff, inset 0 0 15px #0066ff;
+                    text-shadow: 1px 0 #ff0055, -1px 0 #00ffcc;
+                    transform: scale(1.05) rotate(-0.5deg);
+                    border-color: #0066ff;
+                  }
+                  100% {
+                    box-shadow: 0 0 40px #00ffcc, 0 0 60px #00ffcc, inset 0 0 25px #00ffcc;
+                    text-shadow: 0 0 10px #ffffff, -2px 0 #ff0055;
+                    transform: scale(1.08) rotate(0deg);
+                    border-color: #ffffff;
+                  }
+                }
+
+                .quantum-hover-link {
+                  animation: quantum-overdrive 0.25s infinite alternate ease-in-out;
+                  background-color: rgba(0, 255, 204, 0.25);
+                  color: #ffffff;
+                  text-decoration: none !important;
+                  border-bottom: none !important;
+                  outline: none !important;
+                  box-sizing: border-box;
+                  line-height: 1;
+                }
+
+
+    </style>
+	
+	</head>
+<body class="bg-cyberbg text-slate-100 font-sans selection:bg-neoncyan selection:text-black overflow-x-hidden min-h-screen">
+
+    <!-- Animierter Labor-Hintergrund (Radar & Funken) -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Top Navigation & Sprachumschalter -->
+    <div class="max-w-4xl mx-auto px-4 pt-4 flex justify-between items-center relative z-10">
+        <div class="text-[10px] font-mono text-zinc-500" id="scroll-status">STREAM_POS: 0%</div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 py-12 relative z-10">
+        
+        <!-- Header -->
+        <header class="text-center mb-16 border-b border-zinc-800 pb-10">
+            <a href="quantimedus.html" target="_blank" class="quantum-hover-link inline-block px-4 py-1.5 bg-neonpink/25 border border-neonpink/50 rounded-full text-xs font-mono text-white mb-4 tracking-widest relative overflow-hidden transition-all duration-200 no-underline">
+                <span class="relative z-10 font-bold">&#9889; [ QUANTIMEDUS: MOBILE FELDMECHANIK ] &#9889;</span>
+            </a>
+
+            <h1 class="text-3xl md:text-4xl font-extrabold font-mono tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-neoncyan via-neonpink to-neonblue mb-4">
+                MEDIATHEK & WERKE
+            </h1>
+            <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Erforsche die feldmechanischen Rekonstruktionen, elektrostatischen Generatoren und Publikationen von F.G. Stier.
+            </p>
+        </header>
+
+        <!-- Sektoren-Liste -->
+        <div class="space-y-8">
+
+            <!-- SEKTOR 01: Van-de-Graaff -->
+            <article class="flex flex-col md:flex-row gap-6 bg-cyberpanel/90 backdrop-blur border rounded-xl overflow-hidden glow-border-quantimedus">
+                <div class="w-48 mx-auto mt-6 md:mt-0 md:w-56 aspect-[9/16] bg-black flex-shrink-0 relative overflow-hidden rounded-lg md:rounded-none flex items-center justify-center p-3 border-r border-zinc-800">
+				 <a href="https://www.amazon.de/dp/3912752168" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
+                	<video preload="metadata" autoplay loop muted playsinline class="w-full h-full object-cover opacity-85 rounded">
+                     <source src="videos/quantimedus_mit_vandegraaff_generator.mp4" type="video/mp4">
+                     </video>
+				 </a>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                        <span class="text-[9px] font-mono text-neonpink tracking-widest">[ VAN-DE-GRAAFF ]</span>
+                    </div>
+                </div>
+                <div class="p-6 md:p-8 flex flex-col justify-between flex-grow">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-mono text-neonpink tracking-wider">// SEKTOR_01</span>
+                            <span class="px-2 py-0.5 bg-neonpink/20 text-neonpink text-[10px] font-mono rounded font-bold">DAS QUANTENKOMPLOTT I</span>
+                        </div>
+                        <h2 class="text-2xl font-bold font-mono text-white mb-2">Influenz & Van-de-Graaff</h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            Die Entzauberung des Poynting-Vektors und die Rückführung der Elektrostatik auf reine Mechanik und Geometrie.
+                        </p>
+                    </div>
+                    
+                    <!-- Dynamischer Button mit integriertem Mini-Video -->
+                    <div class="flex flex-wrap gap-3">
+                        <a href="quantenkomplott_band1.html" target="_blank" 
+                           class="auto-quantum-btn px-5 py-2.5 bg-gradient-to-r from-neonpink via-neonblue to-neoncyan text-black font-extrabold text-xs font-mono rounded-lg flex items-center gap-3 overflow-hidden relative">
+                            <!-- Mini Video im Button -->
+                            <div class="w-6 h-6 rounded overflow-hidden border border-black/40 flex-shrink-0">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                    <source src="videos/quantimedus_mit_vandegraaff_generator.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <span>START PORTAL STROM ÖFFNEN</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SEKTOR 02: Wimshurstmaschine -->
+            <article class="flex flex-col md:flex-row gap-6 bg-cyberpanel/90 backdrop-blur border rounded-xl overflow-hidden glow-border-quantimedus">
+                <div class="w-48 mx-auto mt-6 md:mt-0 md:w-56 aspect-[9/16] bg-black flex-shrink-0 relative overflow-hidden rounded-lg md:rounded-none flex items-center justify-center p-3 border-r border-zinc-800">
+				 <a href="https://www.amazon.de/dp/3912752176" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
+                	<video preload="metadata" autoplay loop muted playsinline class="w-full h-full object-cover opacity-85 rounded">
+                     <source src="videos/quantimedus_mit_wimshurstmaschine.mp4" type="video/mp4">
+                     </video>
+				 </a>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                        <span class="text-[9px] font-mono text-neonpink tracking-widest">[ WIMSHURST ]</span>
+                    </div>
+                </div>
+                <div class="p-6 md:p-8 flex flex-col justify-between flex-grow">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-mono text-neonpink tracking-wider">// SEKTOR_02</span>
+                            <span class="px-2 py-0.5 bg-neonpink/20 text-neonpink text-[10px] font-mono rounded font-bold">DAS QUANTENKOMPLOTT II</span>
+                        </div>
+                        <h2 class="text-2xl font-bold font-mono text-white mb-2">Die Wimshurst-Maschine</h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            Rekonstruktion der Influenz durch rotierende Gegenscheiben und felddynamische Ladungstrennung.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <a href="quantenkomplott_band2.html" target="_blank" 
+                           class="auto-quantum-btn px-5 py-2.5 bg-gradient-to-r from-neonpink via-neonblue to-neoncyan text-black font-extrabold text-xs font-mono rounded-lg flex items-center gap-3 overflow-hidden relative">
+                            <div class="w-6 h-6 rounded overflow-hidden border border-black/40 flex-shrink-0">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                    <source src="videos/quantimedus_mit_wimshurstmaschine.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <span>PORTAL & WIMSHURST LADEN</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SEKTOR 03: Bonetti-Maschine -->
+            <article class="flex flex-col md:flex-row gap-6 bg-cyberpanel/90 backdrop-blur border rounded-xl overflow-hidden glow-border-quantimedus">
+                <div class="w-48 mx-auto mt-6 md:mt-0 md:w-56 aspect-[9/16] bg-black flex-shrink-0 relative overflow-hidden rounded-lg md:rounded-none flex items-center justify-center p-3 border-r border-zinc-800">
+				 <a href="https://www.amazon.de/dp/3912752168" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
+                	<video preload="metadata" autoplay loop muted playsinline class="w-full h-full object-cover opacity-85 rounded">
+                     <source src="videos/quantimedus_mit_bonetti.mp4" type="video/mp4">
+                     </video>
+				 </a>
+					 
+					 
+					 
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                        <span class="text-[9px] font-mono text-neonpink tracking-widest">[ BONETTI ]</span>
+                    </div>
+                </div>
+                <div class="p-6 md:p-8 flex flex-col justify-between flex-grow">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-mono text-neonpink tracking-wider">// SEKTOR_03</span>
+                            <span class="px-2 py-0.5 bg-neonpink/20 text-neonpink text-[10px] font-mono rounded font-bold">DAS QUANTENKOMPLOTT III</span>
+                        </div>
+                        <h2 class="text-2xl font-bold font-mono text-white mb-2">Die Bonetti-Maschine</h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            Zylinder-Funktion direkt aus blankem Glas – doppelter Spiegelfrequenz-Effekt durch reine Geometrie.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <a href="quantenkomplott_band3.html" target="_blank" 
+                           class="auto-quantum-btn px-5 py-2.5 bg-gradient-to-r from-neonpink via-neonblue to-neoncyan text-black font-extrabold text-xs font-mono rounded-lg flex items-center gap-3 overflow-hidden relative">
+                            <div class="w-6 h-6 rounded overflow-hidden border border-black/40 flex-shrink-0">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                    <source src="videos/quantimedus_mit_bonetti.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <span>BONETTI PORTAL ÖFFNEN</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SEKTOR 04: Kugelblitz / Blitz-Maschine -->
+            <article class="flex flex-col md:flex-row gap-6 bg-cyberpanel/90 backdrop-blur border rounded-xl overflow-hidden glow-border-quantimedus">
+                <div class="w-48 mx-auto mt-6 md:mt-0 md:w-56 aspect-[9/16] bg-black flex-shrink-0 relative overflow-hidden rounded-lg md:rounded-none flex items-center justify-center p-3 border-r border-zinc-800">
+				 <a href="https://www.amazon.de/dp/3912752168" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
+                	<video preload="metadata" autoplay loop muted playsinline class="w-full h-full object-cover opacity-85 rounded">
+                     <source src="videos/kugelblitz.mp4" type="video/mp4">
+                     </video>
+				 </a>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                        <span class="text-[9px] font-mono text-neonpink tracking-widest">[ KUGELBLITZ ]</span>
+                    </div>
+                </div>
+                <div class="p-6 md:p-8 flex flex-col justify-between flex-grow">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-mono text-neonpink tracking-wider">// SEKTOR_04</span>
+                            <span class="px-2 py-0.5 bg-neonpink/20 text-neonpink text-[10px] font-mono rounded font-bold">DAS QUANTENKOMPLOTT IV</span>
+                        </div>
+                        <h2 class="text-2xl font-bold font-mono text-white mb-2">Blitz- & Kugelblitz-Maschine</h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            Deterministische Feldmechanik statt statistischem Rauschen – Entladungsmuster im Hochspannungsfeld.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <a href="quantenkomplott_band4.html" target="_blank" 
+                           class="auto-quantum-btn px-5 py-2.5 bg-gradient-to-r from-neonpink via-neonblue to-neoncyan text-black font-extrabold text-xs font-mono rounded-lg flex items-center gap-3 overflow-hidden relative">
+                            <div class="w-6 h-6 rounded overflow-hidden border border-black/40 flex-shrink-0">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                    <source src="videos/kugelblitz.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <span>KUGELBLITZ PORTAL ÖFFNEN</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- JavaScript für dynamisches Radar, Funken und fließenden Scroll-Hintergrund -->
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Funken-Partikel im Hintergrund
+        const sparks = [];
+        for(let i=0; i<30; i++) {
+            sparks.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 2 + 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                speedX: (Math.random() - 0.5) * 0.5,
+                alpha: Math.random() * 0.5 + 0.1
+            });
+        }
+
+        let scrollProgress = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = docHeight > 0 ? scrollTop / docHeight : 0;
+            document.getElementById('scroll-status').textContent = `STREAM_POS: ${Math.round(scrollProgress * 100)}%`;
+        });
+
+        let radarAngle = 0;
+
+        function animateBackground() {
+            // Dynamische Farbverschiebung des Hintergrunds basierend auf dem Scrollen!
+            // Je weiter man scrollt, desto mehr wandert der Ton von Cyan zu Pink/Blau
+            const r = Math.floor(3 + scrollProgress * 15);
+            const g = Math.floor(3 + (1 - scrollProgress) * 20);
+            const b = Math.floor(5 + scrollProgress * 30);
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.25)`;
+            ctx.fillRect(0, 0, width, height);
+
+            // Dezent gezeichnetes Labor-Radar in der Ecke oder im Zentrum
+            ctx.save();
+            ctx.translate(width * 0.85, height * 0.15);
+            ctx.strokeStyle = 'rgba(0, 255, 204, 0.08)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(0, 0, 80, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(0, 0, 40, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Radar-Scan-Strahl
+            radarAngle += 0.02;
+            ctx.strokeStyle = 'rgba(0, 255, 204, 0.2)';
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(Math.cos(radarAngle) * 80, Math.sin(radarAngle) * 80);
+            ctx.stroke();
+            ctx.restore();
+
+            // Funken / Partikel zeichnen und bewegen
+            sparks.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                if(p.y < 0) p.y = height;
+                if(p.y > height) p.y = 0;
+                if(p.x < 0) p.x = width;
+                if(p.x > width) p.x = 0;
+
+                ctx.fillStyle = scrollProgress > 0.5 ? `rgba(255, 0, 85, ${p.alpha})` : `rgba(0, 255, 204, ${p.alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateBackground);
+        }
+        animateBackground();
+    </script>
+</body>
+</html>

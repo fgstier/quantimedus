@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# Sitemap-Referenz für die Matrix
+Sitemap: https://quantimedus.de/sitemap.xml
