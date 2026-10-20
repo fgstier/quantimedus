@@ -63,8 +63,6 @@
 
     <!-- DER AUTOPILOT (LÄDT DIE CONFIG.JS UND STEUERT KLICKS & WISCHEN) -->
     <script src="config.js"></script>
-<!-- DER AUTOPILOT (LÄDT DIE CONFIG.JS UND STEUERT KLICKS & WISCHEN) -->
-    <script src="config.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             if (typeof bucherListe !== 'undefined') {
@@ -82,43 +80,21 @@
             }
         });
 
-        // High-Performance Swipe-Steuerung für Smartphones (Xiaomi-optimiert)
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        // Wichtig: { passive: false } erlaubt es uns, das Standard-Scrollen bei Bedarf zu stoppen
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].clientX;
-            touchStartY = e.changedTouches[0].clientY;
-        }, { passive: true });
-
+        // Smartphone Wischgesten (Swipe)
+        let startX = 0;
+        document.addEventListener('touchstart', e => { startX = e.changedTouches[0].screenX; });
         document.addEventListener('touchend', e => {
             if (typeof bucherListe === 'undefined') return;
+            let diff = e.changedTouches[0].screenX - startX;
+            const currentFile = window.location.pathname.split("/").pop();
+            let currentIndex = bucherListe.indexOf(currentFile);
+            if (currentIndex === -1) currentIndex = 0;
+            const prevPage = bucherListe[(currentIndex - 1 + bucherListe.length) % bucherListe.length];
+            const nextPage = bucherListe[(currentIndex + 1) % bucherListe.length];
 
-            let touchEndX = e.changedTouches[0].clientX;
-            let touchEndY = e.changedTouches[0].clientY;
-
-            let diffX = touchEndX - touchStartX;
-            let diffY = touchEndY - touchStartY;
-
-            // Wenn die Wischbewegung klar horizontal ist und einen Mindestweg hat
-            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-                const currentFile = window.location.pathname.split("/").pop();
-                let currentIndex = bucherListe.indexOf(currentFile);
-                if (currentIndex === -1) currentIndex = 0;
-                
-                const prevPage = bucherListe[(currentIndex - 1 + bucherListe.length) % bucherListe.length];
-                const nextPage = bucherListe[(currentIndex + 1) % bucherListe.length];
-
-                if (diffX < 0) {
-                    // Nach links wischen -> Vorwärts zur nächsten Seite
-                    window.location.href = nextPage; 
-                } else {
-                    // Nach rechts wischen -> Zurück zur vorherigen Seite
-                    window.location.href = prevPage;  
-                }
-            }
-        }, { passive: false });
+            if (diff < -50) window.location.href = nextPage; 
+            if (diff > 50) window.location.href = prevPage;  
+        });
     </script>
     <meta name="description" content="Als technischer Autor nutze ich die inimitable temptation der Worte als Bildmaschine. Dieses Werk dient als philosophische Analyse und literarische Dekonstruktion im fiktionalen Kontext des Sci-Fi-Romans 'Chronik der permanenten Ursache: Sektor Dresden' von F.G. Stier. Es dient der logischen Verankerung des wissenschaftlich-philosophischen Konzepts.">
     <link rel="preload" as="image" href="../wappen.jpg">
