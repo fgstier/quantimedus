@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>kapitel-01.html // Sektor-Archiv</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050508; color: #00ffcc; margin: 0; overflow: hidden; font-family: monospace; }
+        body::before {
+            content: " "; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%; z-index: 9999; pointer-events: none; opacity: 0.15;
+        }
+        #bg-slot { z-index: -1; }
+        .video-frame {
+            border: 1px solid rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2), inset 0 0 15px rgba(0, 255, 204, 0.1);
+            background: #09090f;
+            position: relative;
+        }
+        #chapterPage {
+            transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+            clip-path: inset(0 0 0 0);
+        }
+        .transition-wipe {
+            clip-path: inset(100% 0 0 0) !important;
+            opacity: 0.2;
+        }
+    </style>
+
+    <!--HREFLANG_START-->
+    <link rel="alternate" hreflang="x-default" href="https://quantimedus.de/quantenkomplott/buchseiten/Quantenkomplott_III/kapitel-01.html">
+    <!--HREFLANG_ENDE-->
+</head>
+<body>
+    <div id="bg-slot" class="fixed inset-0 flex items-center justify-center pointer-events-none"></div>
+    <div class="flex flex-col items-center justify-center h-screen w-screen">
+        <div class="text-center mb-4">
+            <span id="chapterIndicator" class="text-xs tracking-widest text-[#00ffcc] opacity-80">// Seite 1 VON 2</span>
+        </div>
+        <div class="video-frame rounded-xl overflow-hidden p-2 w-[320px] md:w-[380px] aspect-[15.5/22.8] flex items-center justify-center">
+            <img id="chapterPage" src="" alt="" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="mt-6 flex gap-4">
+            <button id="btnPrev" onclick="changeChapter(-1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// ZURÜCK</button>
+            <button id="btnNext" onclick="changeChapter(1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// WEITER</button>
+        </div>
+        <div class="mt-4 flex gap-4">
+            <a href="inhaltsverzeichnis.html" class="px-5 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)]">// ZURÜCK ZUM INHALT</a>
+        </div>
+    </div>
+    <script>
+        const slot = document.getElementById('bg-slot');
+        const canvas = document.createElement('canvas');
+        canvas.width = 350; canvas.height = 350;
+        canvas.style.border = "1px solid #1e1e2f";
+        canvas.style.borderRadius = "50%";
+        canvas.style.boxShadow = "0 0 20px rgba(0, 255, 204, 0.15)";
+        slot.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+        function drawRadar() {
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.08)'; ctx.fillRect(0,0,350,350);
+            ctx.strokeStyle = 'rgba(0, 255, 204, 0.1)';
+            ctx.beginPath(); ctx.arc(175, 175, 160, 0, Math.PI*2); ctx.stroke();
+            ctx.save(); ctx.translate(175, 175); ctx.rotate(angle);
+            ctx.strokeStyle = '#00ffcc'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(160,0); ctx.stroke();
+            ctx.restore();
+            angle += 0.02;
+            requestAnimationFrame(drawRadar);
+        }
+        drawRadar();
+    </script>
+    <script>
+        const pageImage = document.getElementById('chapterPage');
+        const indicator = document.getElementById('chapterIndicator');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+const pageFiles = [
+            { src: 'Quantenkomplott III-07.jpg', alt: "Platten, die die Welt bedeutenDie ganze Welt der Elektrotechnik, die Welt der unscheinbaren Geheimnisse, das Universum der unerforschten Tiefen des Weltalls und der Gedanken fangen mit einer Nadelspitze an. Wer hätte gedacht, dass diese stille Fläche, die sich Spitze nennt, all unser Wissen auf den Kopf stellt. Alles wir wissen und noch nicht kennen, liegt hier fest verankert. Wir sehen es, wir spüren es, aber es zeigt sich nicht. Die Wissenschaft versucht ein Gebäude aus Worten und syntaktischen Spielerein für den Verstand zu errichten. Aber nirgends ist etwas Greifbares, etwas Handfestes zu erspähen.Bevor wir mit der Wimshurst-Maschine weitermachen können, müssen wir tief hinabsteigen in den Abgrund des Kondensators. Diese kleinen unscheinbaren Platten haben große Geheimnisse parat. Im Grunde ist eine eben die Nadelspitze schon ein Kondensator. Dieser ist zwar sehr klein, könnte aber noch viel, viel kleiner sein. Dennoch hütet er all die Dinge, die die meisten Menschen niemals erfahren werden." },
+            { src: 'Quantenkomplott III-08.jpg', alt: "Zwei Leiter stehen sich gegenüber aber nein, es könnten auch Nichtleiter sein. Alles völlig egal. Wichtig allein, ist die beobachtete Tatsache, dass sie sich gegenüber stehen. Die Geometrie als Gespenst dieser Objekte macht zusätzlich wundersame Dinge. Wir können heute fast alles berechnen. Die Leistung, die Kapazität, die Ladung, den Strom, das Verhalten im Netzwerk, die Überspannungen in Schwingkreisen, die elektronischen Filter, die Frequenzgänge und dergleichen mehr. Am Ende ist die Quantenmechanik als letzte Instanz, die mit Sicherheit eine Unsicherheit aller Vorgänge beweisen will und statistische Methoden der Unsicherheiten vorlegt. Die Spitzen der Leiter kann man immer größer machen, bis sich schließlich zwei nackte Platten gegenüber stehen. Aber was passiert dort mit den Ladungen wirklich?Das Bild der sich erweiternden Geometrie, von der isolierten Nadelspitze bis zum klassischen Plattenkondensator, legt den Kern der physikalischen Realität frei.Ein Kondensator ist primär kein Behälter für Teilchen. Er hat eine Geometrie zur Aufspaltung und Ausrichtung des Raumes. Man sagt Feld dazu, weil es sich besser anhört. Jeder kann sofort verstehen, dass da etwas in der Luft liegt, was man eh nicht begreift aber umso besser berechnen kann.Man kann immer etwas messen. Entweder eine Spannung, die wohl heute nur wenige Zuhörer in Vorlesungen und Leser von Fachbüchern verstehen, auch wenn sie beruflich viele Jahre damit gearbeitet haben. Was spannt dort und wer macht eine Größe, die messbar aber nicht greifbar ist? Und dann der wundersame Strom, der ebenso unscheinbar einem Wasserfluss durch eine Rohrleitung gleicht. Was fließ hier und fast führt die Schiene für die Bewegung, wenn sich überhaupt etwas bewegt. Wieso liegt dauerhaft dieses Feld in im Raum und verbraucht sich nicht, ist einfach da und stört sich nicht an Körpern, die sich in diesem Feld abnutzen?" }
+        ];
+        let currentIndex = 0;
+        function updatePageDisplay() {
+            pageImage.src = pageFiles[currentIndex].src;
+            pageImage.alt = pageFiles[currentIndex].alt;
+            indicator.innerText = `// Seite ${currentIndex + 1} VON ${pageFiles.length}`;
+            if (btnPrev) btnPrev.disabled = (currentIndex === 0);
+            if (btnNext) btnNext.disabled = (currentIndex === pageFiles.length - 1);
+        }
+        updatePageDisplay();
+        function changeChapter(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0 || newIndex >= pageFiles.length) return;
+            currentIndex = newIndex;
+            pageImage.classList.add('transition-wipe');
+            setTimeout(() => {
+                updatePageDisplay();
+                pageImage.classList.remove('transition-wipe');
+            }, 400);
+        }
+    </script>
+</body>
+</html>

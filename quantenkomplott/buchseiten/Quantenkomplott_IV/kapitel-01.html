@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>kapitel-01.html // Sektor-Archiv</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050508; color: #00ffcc; margin: 0; overflow: hidden; font-family: monospace; }
+        body::before {
+            content: " "; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%; z-index: 9999; pointer-events: none; opacity: 0.15;
+        }
+        #bg-slot { z-index: -1; }
+        .video-frame {
+            border: 1px solid rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2), inset 0 0 15px rgba(0, 255, 204, 0.1);
+            background: #09090f;
+            position: relative;
+        }
+        #chapterPage {
+            transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+            clip-path: inset(0 0 0 0);
+        }
+        .transition-wipe {
+            clip-path: inset(100% 0 0 0) !important;
+            opacity: 0.2;
+        }
+    </style>
+
+    <!--HREFLANG_START-->
+    <link rel="alternate" hreflang="x-default" href="https://quantimedus.de/quantenkomplott/buchseiten/Quantenkomplott_IV/kapitel-01.html">
+    <!--HREFLANG_ENDE-->
+</head>
+<body>
+    <div id="bg-slot" class="fixed inset-0 flex items-center justify-center pointer-events-none"></div>
+    <div class="flex flex-col items-center justify-center h-screen w-screen">
+        <div class="text-center mb-4">
+            <span id="chapterIndicator" class="text-xs tracking-widest text-[#00ffcc] opacity-80">// Seite 1 VON 2</span>
+        </div>
+        <div class="video-frame rounded-xl overflow-hidden p-2 w-[320px] md:w-[380px] aspect-[15.5/22.8] flex items-center justify-center">
+            <img id="chapterPage" src="" alt="" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="mt-6 flex gap-4">
+            <button id="btnPrev" onclick="changeChapter(-1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// ZURÜCK</button>
+            <button id="btnNext" onclick="changeChapter(1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// WEITER</button>
+        </div>
+        <div class="mt-4 flex gap-4">
+            <a href="inhaltsverzeichnis.html" class="px-5 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)]">// ZURÜCK ZUM INHALT</a>
+        </div>
+    </div>
+    <script>
+        const slot = document.getElementById('bg-slot');
+        const canvas = document.createElement('canvas');
+        canvas.width = 350; canvas.height = 350;
+        canvas.style.border = "1px solid #1e1e2f";
+        canvas.style.borderRadius = "50%";
+        canvas.style.boxShadow = "0 0 20px rgba(0, 255, 204, 0.15)";
+        slot.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+        function drawRadar() {
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.08)'; ctx.fillRect(0,0,350,350);
+            ctx.strokeStyle = 'rgba(0, 255, 204, 0.1)';
+            ctx.beginPath(); ctx.arc(175, 175, 160, 0, Math.PI*2); ctx.stroke();
+            ctx.save(); ctx.translate(175, 175); ctx.rotate(angle);
+            ctx.strokeStyle = '#00ffcc'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(160,0); ctx.stroke();
+            ctx.restore();
+            angle += 0.02;
+            requestAnimationFrame(drawRadar);
+        }
+        drawRadar();
+    </script>
+    <script>
+        const pageImage = document.getElementById('chapterPage');
+        const indicator = document.getElementById('chapterIndicator');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+const pageFiles = [
+            { src: 'komplott4-07.jpg', alt: "Das Drama der SchuleDie Influenz hat uns gelehrt, dass sie die alles antreibende Kraft der Elektrizität ist. Sie erklärt nicht nur die Entstehung der so geliebten Ladungstrennung mit der Schulweisheit. Sie gibt uns auch den Raum als Spannungsort jeglicher Energieportionen. Quantimedus ist immer noch auf der Suche der Raumspannungen und was sie im Inneren zusammen hält.Ich, Quantimedus, bin nicht aus dem Kopf meines Autors gekrochen, um dich zu belehren. Ich bin hier, weil er es nicht mehr ertragen konnte, wie die Faszination der Wirklichkeit unter Schichten von akademischem Staub erstickt.Leg dieses Buch nicht gleich wieder weg, nur weil du glaubst, du hättest Physik verstanden oder sie sei zu langweilig. Vielleicht hast du bisher lediglich gelernt, Vokabeln auswendig zu lernen, die man dir eingeimpft hat, um deinen Verstand ruhigzustellen. Die leidige Mathematik ist ein Segen für jede Technik und jede Software – aber wenn man nur im Kontext ihrer Syntax schwimmt, verpasst man das eigentliche Abenteuer.Im Augenblick zählt nur die Wahrheit dieser ersten Seiten – das Probelesen. Die Schonkost an zarten Worten wird auf den Prüfstand der Kaufkultur gelegt. Es muss gefallen oder nützlich sein, was man hier liest. Doch wer schon alles zu wissen glaubt, verlernt das Staunen. Man kann in die Glotze schauen und sich totgucken, während alles durchgeknetet und lustig serviert wird. Schade um die Zeit! Denn es ist das Allerkleinste, das Unscheinbare und Allgegenwärtige, das die wirklich großen Gedankensprünge zaubert.Allein schon eine schüchtern brennende Kerze macht doch alles auf diesem Planeten zur Blüte der Natur. Dort steckt alle drin, was die Wissenschaft benötigt um unendlich viel Wissen" },
+            { src: 'komplott4-08.jpg', alt: "zur stapeln. Thermodynamik, Chemie, Physik, Statik, Dynamik, um nur ein paar Wortfetzen zu benennen. Selbst Gegenwart und Vergangenheit oder Philosophie bis Entropie stecken in dieser Beobachtung des flackernden Lichtes, was immer das Licht auch sein möge.Die Gedanken meines Autors, blicken zurück an den ersten leichtfüßigen Physikunterricht. Er sieht die Katzenfell-Lappen, den Hartgummistab, den Luftballon an der Wand. Was hat man ihm alles für zauberhafte Geschichten erzählt? „Positive und negative Ladung“? Ein „elektrisches Feld“? Nun, das sind Märchen für Siebenjährige. Vokabel-Narkotika und Wortbetäubungs-Spritzen für den aufkommenden Verstand. Man versteht die vielen Dinge noch nicht und wird sie wahrscheinlich niemals verstehen wollen.Erst später vielleicht, bei den Köpfen, die mehr wissen wollen, kommen tiefere Einsichten. Und dann plötzlich, wie ein Funken aus der Hölle, kommt die Erleuchtung. Man weiß plötzlich vor Unmengen an Wissen und Informationen, die im Gedächtnis abgelegt sind, wieder genauso viel wie vor dem Schulunterricht. Die Mauer, die Schlucht an Information, ist nun im Laufe vieler Jahre, angewachsen zu einem Monster der Wissensflut. Die Situation des Verstandes ist nun aber unmerklich noch viel schlimmer geworden. Der Saft der Worte und Beweise ist als feste Domain eines Grundwissens eingeimpft in das Neuronen-Netz im Kopf und wurde fest verdrahten.Die Kabel sind gelegt, sie haben sich verteilt in jede lebende Zelle. Es gibt nun kaum ein Entrinnen aus dem Gefängnis der dort kreisenden Gedanken. Einem Musiker fällt es eben auch nicht mehr auf, dass er die Finger bewegt. Alles wurde im Körper abgespeichert und hat sich verselbständigt." }
+        ];
+        let currentIndex = 0;
+        function updatePageDisplay() {
+            pageImage.src = pageFiles[currentIndex].src;
+            pageImage.alt = pageFiles[currentIndex].alt;
+            indicator.innerText = `// Seite ${currentIndex + 1} VON ${pageFiles.length}`;
+            if (btnPrev) btnPrev.disabled = (currentIndex === 0);
+            if (btnNext) btnNext.disabled = (currentIndex === pageFiles.length - 1);
+        }
+        updatePageDisplay();
+        function changeChapter(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0 || newIndex >= pageFiles.length) return;
+            currentIndex = newIndex;
+            pageImage.classList.add('transition-wipe');
+            setTimeout(() => {
+                updatePageDisplay();
+                pageImage.classList.remove('transition-wipe');
+            }, 400);
+        }
+    </script>
+</body>
+</html>

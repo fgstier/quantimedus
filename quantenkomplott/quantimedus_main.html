@@ -165,14 +165,28 @@
                   line-height: 1;
                 }
 
+                /* Basis-Styles */
+                body {
+                    background-color: #030305;
+                    font-family: 'Fira Code', monospace;
+                }
+            
+    .btn-plasma-stream { position: relative; background: #0a0a12; overflow: hidden; z-index: 1; border: 1px solid rgba(0, 240, 255, 0.3); }
+    .btn-plasma-stream::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, #00f0ff, #ffffff, transparent); animation: rotate-stream 2s linear infinite; z-index: -2; }
+    .btn-plasma-stream::after { content: ''; position: absolute; inset: 2px; background: #0c0c14; border-radius: 6px; z-index: -1; }
+    @keyframes rotate-stream { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
 
     </style>
 	
 
     <!--HREFLANG_START:SINGLE-->
-<link rel="alternate" hreflang="x-default" href="https://quantimedus.de/quantenkomplott/quantimedus_main.html" />
-    <!--HREFLANG_ENDE-->
+<!--HREFLANG_ENDE-->
 
+
+    <!--HREFLANG_START-->
+    <!-- Hier generiert das C#-Tool automatisch die Sprach-Links -->
+    <!--HREFLANG_ENDE-->
 
     <!--HREFLANG_START-->
     <!-- Hier generiert das C#-Tool automatisch die Sprach-Links -->
@@ -244,7 +258,15 @@
                             </div>
                             <span>START PORTAL STROM ÖFFNEN</span>
                         </a>
+                    <a href="buchseiten/quantenkomplott_I/index.html" target="_blank" class="btn-plasma-stream py-3.5 px-4 rounded-lg font-bold text-xs tracking-wider text-neoncyan flex items-center justify-center gap-2 text-decoration-none">
+                        <span>&#9889;</span>  Inhaltsverzeichnis
+                    </a>
+
                     </div>
+					
+
+					
+					
                 </div>
             </article>
 
@@ -282,6 +304,10 @@
                             </div>
                             <span>PORTAL & WIMSHURST LADEN</span>
                         </a>
+                    <a href="buchseiten/quantenkomplott_II/index.html" target="_blank" class="btn-plasma-stream py-3.5 px-4 rounded-lg font-bold text-xs tracking-wider text-neoncyan flex items-center justify-center gap-2 text-decoration-none">
+                        <span>&#9889;</span>  Inhaltsverzeichnis
+                    </a>
+						
                     </div>
                 </div>
             </article>
@@ -323,6 +349,10 @@
                             </div>
                             <span>BONETTI PORTAL ÖFFNEN</span>
                         </a>
+                    <a href="buchseiten/quantenkomplott_III/index.html" target="_blank" class="btn-plasma-stream py-3.5 px-4 rounded-lg font-bold text-xs tracking-wider text-neoncyan flex items-center justify-center gap-2 text-decoration-none">
+                        <span>&#9889;</span>  Inhaltsverzeichnis
+                    </a>
+
                     </div>
                 </div>
             </article>
@@ -361,6 +391,10 @@
                             </div>
                             <span>KUGELBLITZ PORTAL ÖFFNEN</span>
                         </a>
+                    <a href="buchseiten/quantenkomplott_IV/index.html" target="_blank" class="btn-plasma-stream py-3.5 px-4 rounded-lg font-bold text-xs tracking-wider text-neoncyan flex items-center justify-center gap-2 text-decoration-none">
+                        <span>&#9889;</span>  Inhaltsverzeichnis
+                    </a>
+						
                     </div>
                 </div>
             </article>

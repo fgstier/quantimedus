@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>kapitel-02.html // Sektor-Archiv</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050508; color: #00ffcc; margin: 0; overflow: hidden; font-family: monospace; }
+        body::before {
+            content: " "; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%; z-index: 9999; pointer-events: none; opacity: 0.15;
+        }
+        #bg-slot { z-index: -1; }
+        .video-frame {
+            border: 1px solid rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2), inset 0 0 15px rgba(0, 255, 204, 0.1);
+            background: #09090f;
+            position: relative;
+        }
+        #chapterPage {
+            transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+            clip-path: inset(0 0 0 0);
+        }
+        .transition-wipe {
+            clip-path: inset(100% 0 0 0) !important;
+            opacity: 0.2;
+        }
+    </style>
+
+    <!--HREFLANG_START-->
+    <link rel="alternate" hreflang="x-default" href="https://quantimedus.de/quantenkomplott/buchseiten/Quantenkomplott_II/kapitel-02.html">
+    <!--HREFLANG_ENDE-->
+</head>
+<body>
+    <div id="bg-slot" class="fixed inset-0 flex items-center justify-center pointer-events-none"></div>
+    <div class="flex flex-col items-center justify-center h-screen w-screen">
+        <div class="text-center mb-4">
+            <span id="chapterIndicator" class="text-xs tracking-widest text-[#00ffcc] opacity-80">// Seite 1 VON 2</span>
+        </div>
+        <div class="video-frame rounded-xl overflow-hidden p-2 w-[320px] md:w-[380px] aspect-[15.5/22.8] flex items-center justify-center">
+            <img id="chapterPage" src="" alt="" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="mt-6 flex gap-4">
+            <button id="btnPrev" onclick="changeChapter(-1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// ZURÜCK</button>
+            <button id="btnNext" onclick="changeChapter(1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// WEITER</button>
+        </div>
+        <div class="mt-4 flex gap-4">
+            <a href="inhaltsverzeichnis.html" class="px-5 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)]">// ZURÜCK ZUM INHALT</a>
+        </div>
+    </div>
+    <script>
+        const slot = document.getElementById('bg-slot');
+        const canvas = document.createElement('canvas');
+        canvas.width = 350; canvas.height = 350;
+        canvas.style.border = "1px solid #1e1e2f";
+        canvas.style.borderRadius = "50%";
+        canvas.style.boxShadow = "0 0 20px rgba(0, 255, 204, 0.15)";
+        slot.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+        function drawRadar() {
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.08)'; ctx.fillRect(0,0,350,350);
+            ctx.strokeStyle = 'rgba(0, 255, 204, 0.1)';
+            ctx.beginPath(); ctx.arc(175, 175, 160, 0, Math.PI*2); ctx.stroke();
+            ctx.save(); ctx.translate(175, 175); ctx.rotate(angle);
+            ctx.strokeStyle = '#00ffcc'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(160,0); ctx.stroke();
+            ctx.restore();
+            angle += 0.02;
+            requestAnimationFrame(drawRadar);
+        }
+        drawRadar();
+    </script>
+    <script>
+        const pageImage = document.getElementById('chapterPage');
+        const indicator = document.getElementById('chapterIndicator');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+const pageFiles = [
+            { src: 'das quantenkomplott2-18.jpg', alt: "Der Funkengenerator und das Rotations-ParadoxonFangen wir mit der einfachsten Versuchsanordnung und den einfachsten Beschreibungen der Zubehörteile an. Ein Lederlappen und ein Glasstab werden kräftig gerieben und man kann anschließend die merkwürdigsten Kräfte beobachten. Wie erklärt man diese Effekte? Man sagt dazu Reibungselektrizität (fachlich als triboelektrischer Effekt bezeichnet) – ein Prozess der Elektrostatik, bei dem durch direkten Kontakt und anschließendes Trennen zweier Stoffe Ladungen verschoben werden.Doch schon beim nächsten Schritt im Physikraum schlägt das Lehrbuch die Tür zur Realität zu. Man stellt eine glänzende Apparatur vor dich hin: Die Wimshurst-Maschine. Wenn man die Einzelteile der Maschine grob betrachtet, ist nicht ersichtlich, wie dieser Mechanismus funktionieren soll. Dieses Unikum ist bis zum heutigen Tag ein Monster der geschichtlichen Entwicklung" },
+            { src: 'das quantenkomplott2-19.jpg', alt: "und ein Drachen für jede Theorie. Wer sich hier behaupten will, muss in die Quantenmechanik kriechen und hat am Ende doch keine Ahnung, was hier geschieht. Dieses Gerät ist das Universum aller Theorien im Bereich der Elektrodynamik, Elektrostatik und der Philosophie. Beginnen wir mit den einfachen Objekten an diesem Konstrukt, machen wilde Aussagen über die Funktion und werden Zeuge einer blamablen Niederlage jeder Theorie über diese Natur-Erscheinung. Betreten wir den erkenntnistheoretischer Kampfring.Man lässt zwei Glasscheiben gegeneinander rotieren, zündet blitzende Funken an der Kugelfunkenstrecke und flüstert dir ins Ohr, dass es zwingend zwei Scheiben und berührungslose Influenz braucht, damit dieses Wunderwerk funktioniert. Ein symmetrisches Dogma zur Beruhigung des aufkeimenden Verstandes.Niemand fragt nach: Warum eigentlich zwei Scheiben? Was machen die metallischen Querstäbe, wenn alles angeblich „ohne Berührung“ getrennt wird? Und warum verschweigt man dir, dass der Raum selbst längst als unsichtbarer Gegenpart bereitsteht?Schauen wir uns diese Konstruktion genauer an und zerlegen das Märchen der Schulphysik. Was sagt das Lehrbuch prinzipiell zu diesem Wunderwerk? Hier ein Versuch der Kurzfassung:Die Wimshurst- Influenzmaschine ist ein elektrostatischer Generator, der durch elektrostatische Influenz (Ladungstrennung ohne Berührung) und mechanische Rotation hohe elektrische Gleichspannungen erzeugt." }
+        ];
+        let currentIndex = 0;
+        function updatePageDisplay() {
+            pageImage.src = pageFiles[currentIndex].src;
+            pageImage.alt = pageFiles[currentIndex].alt;
+            indicator.innerText = `// Seite ${currentIndex + 1} VON ${pageFiles.length}`;
+            if (btnPrev) btnPrev.disabled = (currentIndex === 0);
+            if (btnNext) btnNext.disabled = (currentIndex === pageFiles.length - 1);
+        }
+        updatePageDisplay();
+        function changeChapter(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0 || newIndex >= pageFiles.length) return;
+            currentIndex = newIndex;
+            pageImage.classList.add('transition-wipe');
+            setTimeout(() => {
+                updatePageDisplay();
+                pageImage.classList.remove('transition-wipe');
+            }, 400);
+        }
+    </script>
+</body>
+</html>

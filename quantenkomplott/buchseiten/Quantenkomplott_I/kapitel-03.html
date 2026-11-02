@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>kapitel-03.html // Sektor-Archiv</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050508; color: #00ffcc; margin: 0; overflow: hidden; font-family: monospace; }
+        body::before {
+            content: " "; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%; z-index: 9999; pointer-events: none; opacity: 0.15;
+        }
+        #bg-slot { z-index: -1; }
+        .video-frame {
+            border: 1px solid rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2), inset 0 0 15px rgba(0, 255, 204, 0.1);
+            background: #09090f;
+            position: relative;
+        }
+        #chapterPage {
+            transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+            clip-path: inset(0 0 0 0);
+        }
+        .transition-wipe {
+            clip-path: inset(100% 0 0 0) !important;
+            opacity: 0.2;
+        }
+    </style>
+
+    <!--HREFLANG_START-->
+    <link rel="alternate" hreflang="x-default" href="https://quantimedus.de/quantenkomplott/buchseiten/Quantenkomplott_I/kapitel-03.html">
+    <!--HREFLANG_ENDE-->
+</head>
+<body>
+    <div id="bg-slot" class="fixed inset-0 flex items-center justify-center pointer-events-none"></div>
+    <div class="flex flex-col items-center justify-center h-screen w-screen">
+        <div class="text-center mb-4">
+            <span id="chapterIndicator" class="text-xs tracking-widest text-[#00ffcc] opacity-80">// Seite 1 VON 2</span>
+        </div>
+        <div class="video-frame rounded-xl overflow-hidden p-2 w-[320px] md:w-[380px] aspect-[15.5/22.8] flex items-center justify-center">
+            <img id="chapterPage" src="" alt="" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="mt-6 flex gap-4">
+            <button id="btnPrev" onclick="changeChapter(-1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// ZURÜCK</button>
+            <button id="btnNext" onclick="changeChapter(1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// WEITER</button>
+        </div>
+        <div class="mt-4 flex gap-4">
+            <a href="inhaltsverzeichnis.html" class="px-5 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)]">// ZURÜCK ZUM INHALT</a>
+        </div>
+    </div>
+    <script>
+        const slot = document.getElementById('bg-slot');
+        const canvas = document.createElement('canvas');
+        canvas.width = 350; canvas.height = 350;
+        canvas.style.border = "1px solid #1e1e2f";
+        canvas.style.borderRadius = "50%";
+        canvas.style.boxShadow = "0 0 20px rgba(0, 255, 204, 0.15)";
+        slot.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+        function drawRadar() {
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.08)'; ctx.fillRect(0,0,350,350);
+            ctx.strokeStyle = 'rgba(0, 255, 204, 0.1)';
+            ctx.beginPath(); ctx.arc(175, 175, 160, 0, Math.PI*2); ctx.stroke();
+            ctx.save(); ctx.translate(175, 175); ctx.rotate(angle);
+            ctx.strokeStyle = '#00ffcc'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(160,0); ctx.stroke();
+            ctx.restore();
+            angle += 0.02;
+            requestAnimationFrame(drawRadar);
+        }
+        drawRadar();
+    </script>
+    <script>
+        const pageImage = document.getElementById('chapterPage');
+        const indicator = document.getElementById('chapterIndicator');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+const pageFiles = [
+            { src: 'das quantenkomplott 1-36.jpg', alt: "Die einfachste aller ErklärungWenn man das Problem des Glasstabes und dem Lederlappen betrachtet, dann ist nicht klar, woher die Elektronen die Kräfte nehmen, um bei der Trennung ein Kraftfeld zu erzeugen. Bei der Reibungselektrizität zwischen gleich geladenen Teilchen entsteht der Eindruck, als ob die Kräfte „aus dem Nichts“ auftauchen. Die Aufklärung liegt in der Einführung von mechanischer Arbeit (wieder Energie) und der elektromagnetischen Grundkraft. Die Elektronen selbst erzeugen keine neue Kraft oder Energie. Sie tragen lediglich eine fundamentale Eigenschaft: die elektrische Elementarladung." },
+            { src: 'das quantenkomplott 1-37.jpg', alt: "Es herrscht in der klassischen Physik die Erklärungsnot und ein heimliches Schweigen darüber, woher die Elektronen eigentlich die Kräfte nehmen, um bei der Trennung plötzlich ein Kraftfeld aufzuspannen. Die Kräfte scheinen schlicht aus dem Nichts aufzutauchen. Um das theoretische Gebäude zu retten, führt man blitzschnell zwei Rettungsanker ein. Den Begriff der Mechanischen Arbeit und das Postulat einer elektromagnetischen Grundkraft. Die Elektronen selbst – so die offizielle Nomenklatur – erzeugen keine Energie. Man stattet sie einfach per Definition mit einer unbelegbaren Wundereigenschaft aus, nämlich der elektrischen Elementarladung.Die Herkunft der Energie wird nun der sogenannten Reibungsarbeit zugeschrieben. Da sich Glas und Leder anziehen, verrichtet man beim Auseinanderziehen physikalische Arbeit. Und jetzt kommt der sprachliche Kunstgriff: Man behauptet einfach, diese aufgewendete Energie sei ab sofort „im Feld gespeichert“.Man deklariert einen leeren Raum zum Speicherort für potenzielle Energie, bloß weil man Ladungen getrennt hat. Und diese geparkte Energie verwandelt sich augenblicklich in eine neue Vokabel - die Coulomb-Kraft.Die getrennten Ladungen erzeugen ein elektrisches Feld. Tritt ein neutraler Körper (z. B. ein Papierschnipsel) in dieses Feld, richtet das Feld die im Papier gebundenen Ladungen aus (Dipol-Polarisation). Dadurch entsteht die resultierende Coulomb-Kraft.Nun kann man die Objekte willkürlich weit auseinander bringen, aber die Gesamtenergie strebt gegen einen festen" }
+        ];
+        let currentIndex = 0;
+        function updatePageDisplay() {
+            pageImage.src = pageFiles[currentIndex].src;
+            pageImage.alt = pageFiles[currentIndex].alt;
+            indicator.innerText = `// Seite ${currentIndex + 1} VON ${pageFiles.length}`;
+            if (btnPrev) btnPrev.disabled = (currentIndex === 0);
+            if (btnNext) btnNext.disabled = (currentIndex === pageFiles.length - 1);
+        }
+        updatePageDisplay();
+        function changeChapter(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0 || newIndex >= pageFiles.length) return;
+            currentIndex = newIndex;
+            pageImage.classList.add('transition-wipe');
+            setTimeout(() => {
+                updatePageDisplay();
+                pageImage.classList.remove('transition-wipe');
+            }, 400);
+        }
+    </script>
+</body>
+</html>

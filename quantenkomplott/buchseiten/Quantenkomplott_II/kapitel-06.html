@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>kapitel-06.html // Sektor-Archiv</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050508; color: #00ffcc; margin: 0; overflow: hidden; font-family: monospace; }
+        body::before {
+            content: " "; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%; z-index: 9999; pointer-events: none; opacity: 0.15;
+        }
+        #bg-slot { z-index: -1; }
+        .video-frame {
+            border: 1px solid rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2), inset 0 0 15px rgba(0, 255, 204, 0.1);
+            background: #09090f;
+            position: relative;
+        }
+        #chapterPage {
+            transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+            clip-path: inset(0 0 0 0);
+        }
+        .transition-wipe {
+            clip-path: inset(100% 0 0 0) !important;
+            opacity: 0.2;
+        }
+    </style>
+
+    <!--HREFLANG_START-->
+    <link rel="alternate" hreflang="x-default" href="https://quantimedus.de/quantenkomplott/buchseiten/Quantenkomplott_II/kapitel-06.html">
+    <!--HREFLANG_ENDE-->
+</head>
+<body>
+    <div id="bg-slot" class="fixed inset-0 flex items-center justify-center pointer-events-none"></div>
+    <div class="flex flex-col items-center justify-center h-screen w-screen">
+        <div class="text-center mb-4">
+            <span id="chapterIndicator" class="text-xs tracking-widest text-[#00ffcc] opacity-80">// Seite 1 VON 2</span>
+        </div>
+        <div class="video-frame rounded-xl overflow-hidden p-2 w-[320px] md:w-[380px] aspect-[15.5/22.8] flex items-center justify-center">
+            <img id="chapterPage" src="" alt="" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="mt-6 flex gap-4">
+            <button id="btnPrev" onclick="changeChapter(-1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// ZURÜCK</button>
+            <button id="btnNext" onclick="changeChapter(1)" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)] disabled:opacity-30 disabled:pointer-events-none">// WEITER</button>
+        </div>
+        <div class="mt-4 flex gap-4">
+            <a href="inhaltsverzeichnis.html" class="px-5 py-2 border border-[#00ffcc] text-[#00ffcc] text-xs font-bold hover:bg-[#00ffcc] hover:text-[#050508] transition shadow-[0_0_10px_rgba(0,255,204,0.2)]">// ZURÜCK ZUM INHALT</a>
+        </div>
+    </div>
+    <script>
+        const slot = document.getElementById('bg-slot');
+        const canvas = document.createElement('canvas');
+        canvas.width = 350; canvas.height = 350;
+        canvas.style.border = "1px solid #1e1e2f";
+        canvas.style.borderRadius = "50%";
+        canvas.style.boxShadow = "0 0 20px rgba(0, 255, 204, 0.15)";
+        slot.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+        function drawRadar() {
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.08)'; ctx.fillRect(0,0,350,350);
+            ctx.strokeStyle = 'rgba(0, 255, 204, 0.1)';
+            ctx.beginPath(); ctx.arc(175, 175, 160, 0, Math.PI*2); ctx.stroke();
+            ctx.save(); ctx.translate(175, 175); ctx.rotate(angle);
+            ctx.strokeStyle = '#00ffcc'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(160,0); ctx.stroke();
+            ctx.restore();
+            angle += 0.02;
+            requestAnimationFrame(drawRadar);
+        }
+        drawRadar();
+    </script>
+    <script>
+        const pageImage = document.getElementById('chapterPage');
+        const indicator = document.getElementById('chapterIndicator');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+const pageFiles = [
+            { src: 'das quantenkomplott2-58.jpg', alt: "Die Metall-SektorenWenn man die Metallsektoren per Hand ausschneidet und aufklebt, gibt es ein paar gnadenlose physikalische Gesetze, die man beachten muss, sonst bricht das System zusammen. Jeder einzelne Metallsektor sitzt isoliert auf der Glas-, Acryl- oder Hartpapierscheibe. Es gibt keine Kabel oder Leitungen, die von den Sektoren zur zentralen Achse führen. Der Abstand zueinander ist die Isolationsbarriere. Die Sektoren dürfen sich untereinander auf der rotierenden Scheibe keinesfalls berühren oder zu nah beieinander liegen. Zwischen den einzelnen Metallsegmenten muss ein exakter, gleichmäßiger Luftspalt bleiben. Ist der Abstand zu gering, springt der Funke (oder ein schleichender Kriechstrom) direkt von Sektor zu Sektor über, noch bevor sie die Neutralisationsborsten oder Abnehmer erreichen. Das System entlädt sich sofort intern im Kreis, anstatt die Spannung aufzubauen.Der Abstand zum Rand stellt eine Feldbegrenzung nach außen dar. An scharfen Kanten und Ecken von Metallteilen konzentriert sich das elektrische Feld massiv und es entsteht das Problem der" },
+            { src: 'das quantenkomplott2-59.jpg', alt: "Spitzenwirkung zur Luft und deren Ionisation. Die Ladungen springen dann unkontrolliert auf den Rahmen oder die Luft ab (Corona-Verlust).Auch zur Mitte (zur Achse hin) muss ein sauberer Isolationsabstand eingehalten werden, damit die Welle oder die Lagerung keinen verfrühten Kurzschluss verursachen. Die Sektoren-Scheiben dürfen keine ausgefransten Ränder oder abstehenden winzigen Metallspäne besitzen. Selbst Klebereste sind ungünstig. Jede mikroskopische Spitze an einer Kante wirkt wie ein Blitzableiter und saugt die mühsam aufgebaute Ladung unkontrolliert ab.Die Abstände zwischen den Sektoren sollten über den gesamten Kreisumfang so gleichmäßig wie möglich sein. Wenn ein Sektor einen zu großen oder zu kleinen Abstand zum Nachbarn hat, gerät der feine Takt der Neutralisation aus dem Rhythmus. Die Induktion stottert, weil der mechanische &quot;Puls&quot; ungleichmäßig wird. Die gegenüberliegenden Sektoren werden eventuell auch ungleichmäßig mit den dort liegenden Abnehmern überstrichen." }
+        ];
+        let currentIndex = 0;
+        function updatePageDisplay() {
+            pageImage.src = pageFiles[currentIndex].src;
+            pageImage.alt = pageFiles[currentIndex].alt;
+            indicator.innerText = `// Seite ${currentIndex + 1} VON ${pageFiles.length}`;
+            if (btnPrev) btnPrev.disabled = (currentIndex === 0);
+            if (btnNext) btnNext.disabled = (currentIndex === pageFiles.length - 1);
+        }
+        updatePageDisplay();
+        function changeChapter(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0 || newIndex >= pageFiles.length) return;
+            currentIndex = newIndex;
+            pageImage.classList.add('transition-wipe');
+            setTimeout(() => {
+                updatePageDisplay();
+                pageImage.classList.remove('transition-wipe');
+            }, 400);
+        }
+    </script>
+</body>
+</html>
