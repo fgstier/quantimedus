@@ -1,0 +1,58 @@
+﻿{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Book",
+        "name": "Influenz – das Quantenkomplott I",
+        "isbn": "978-3-912752-16-8",
+        "sameAs": [
+          "https://openlibrary.org/works/OL46333006W"
+          ,"https://www.wikidata.org/wiki/Q142111387"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Book",
+        "name": "Influenz – das Quantenkomplott II",
+        "isbn": "978-3-912752-17-5",
+        "sameAs": [
+          "https://openlibrary.org/works/OL46333187W"
+          ,"https://www.wikidata.org/wiki/Q142115180"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Book",
+        "name": "Influenz – das Quantenkomplott III",
+        "isbn": "978-3-912752-20-5",
+        "sameAs": [
+          "https://openlibrary.org/works/OL46333332W"
+          ,"https://www.wikidata.org/wiki/Q142115267"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Book",
+        "name": "Influenz – das Quantenkomplott IV",
+        "isbn": "978-3-912752-21-2",
+        "sameAs": [
+          "https://openlibrary.org/works/OL46333470W"
+          ,"https://www.wikidata.org/wiki/Q142115397"
+        ]
+      }
+    }
+  ]
+}
